@@ -1,0 +1,69 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH NPLOT 3F "%G%"
+.SH NAME
+nplot \- plot a set of points
+.SH SYNOPSIS
+.HP 15
+\fBcall nplot(n, x, y, igraf, iclip, thick, ithick, asymb)\fP
+.TP 15
+\fBinteger\fP
+\fBn, iclip, thick, ithick\fP
+.TP 15
+\fBreal\fP
+\fBx(n), y(n)\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBasymb\fP
+.SH DESCRIPTION
+The FORTRAN routine \fBnplot()\fP will plot a set of points specified by the arrays x and y.
+.SH ARGUMENTS
+.TP 15
+\fBn\fP
+.SB (i)
+The number of points to plot
+.TP 15
+\fBx\fP
+.SB (i)
+Plot data horizontal coordinate array
+.TP 15
+\fBy\fP
+.SB (i)
+Plot data vertical coordinate array
+.TP 15
+\fBigraf\fP
+.SB (i)
+Plotting flag
+.nf
+< 0 - plot only symbols with no lines
+= 0 - plot only lines with no symbols
+> 0 - plot both lines and symbols
+.fi
+.TP 15
+\fBiclip\fP
+.SB (i)
+Clipping flag (see routine plot1(3f))
+.TP 15
+\fBthick\fP
+.SB (i)
+Thickness of line in inches
+.TP 15
+\fBithick\fP
+.SB (i)
+The flag which controls whether line is thickened symeterically about the center or asymetrically.
+.nf
+< 0 - thicken to the left
+= 0 - symetrically
+> 0 - thicken to the right in the direction of plotting
+.fi
+.TP 15
+\fBasymb\fP
+.SB (i)
+Plotting symbol; if the number of points, n, is negative then it as assumed that asymb is an array of dimension n.
+.SH "SEE ALSO"
+\fBniceplot(3f), plot1(3f)\fP
+.SH AUTHOR
+Danny Harvey

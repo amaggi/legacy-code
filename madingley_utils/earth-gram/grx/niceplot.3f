@@ -1,0 +1,18 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH NICEPLOT 3F "%G%"
+.SH NAME
+niceplot \- interactive graphics toolkit
+.SH DESCRIPTION
+The \fBniceplot\fP toolkit provides a full interactive X11 windows capability plus high resolution postscript output. These FORTRAN callable subroutines fork an X window plotting daemon program, nxplotd which must be available in the user's path. The plotting daemon is responsible for repairing the window and servicing the X event stream and the program runs concurrently with the user's program. This allows for simple tty-based command driven user interfaces without the programmer being required to learn about X-window toolkits and notifier based mouse driven interfaces.
+ 
+An optional high resolution postscript output file can be produced (see \fBinitt(3f)\fP) which mimics the visual display.
+  
+All fonts used by these subroutines are the vector Hershey fonts and a binary font file must be made available. The path to this font file must be specified in the subroutine cfont at compile time. An ASCII version of this font file is available from D. Harvey along with a program, readfont, which will read the ASCII file and produce the binary file.
+.SH "SEE ALSO"
+\fBaxis(3f), box(3f), cfont(3f), chrdir(3f), chrsiz(3f), circle(3f), clear(3f), clrrgn(3f), cpyrgn(3f), cursor(3f), finitt(3f), fplot(3f), getchr(3f), getsiz(3f), initt(3f), laxis(3f), line(3f), llaxis(3f), ltype(3f), ncontour(3f), nplot(3f), ntype(3f), plot1(3f), sclsiz(3f), setbac(3f), setbg(3f), setdim(3f), setfg(3f), setfor(3f), setscl(3f), text(3f), tics(3f), xmap(3f), ymap(3f)\fP
+.SH AUTHOR
+Danny Harvey

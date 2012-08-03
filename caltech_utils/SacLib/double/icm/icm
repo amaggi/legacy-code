@@ -1,0 +1,13 @@
+dcpft.f:      SUBROUTINE DCPFT(R, I, N, INCP, ISIGNP)
+
+dseis.f:      subroutine dseis(nfreq,delfrq,xre,xim,kp,nerr)
+
+getran.f:      subroutine getran ( nfreq, delfrq, const, nzero, zero,
+getran.f:c   .....Subroutine to compute the transfer function.....
+
+polezero.f:      subroutine polezero ( nfreq, delfrq, xre, xim , subtyp, nerr)
+
+rmean.f:      subroutine rmean(dat,npts)
+rtrend.f:      subroutine rtrend(y, n) 
+
+transfer.f90:      subroutine transfer(dat,npts,delta,kpfrom,kpto,f, nerr)

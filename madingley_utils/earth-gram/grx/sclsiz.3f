@@ -1,0 +1,28 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SCLSIZ 3F "%G%"
+.SH NAME
+sclsiz \- scale character sizes
+.SH SYNOPSIS
+\fBcall sclsiz(scale)\fP
+.TP 15
+\fBreal*4\fP
+\fBscale\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBsclsiz()\fP will scale character sizes up or down.
+.SH ARGUMENTS
+.TP 15
+\fBscale\fP
+.SB (i)
+scale factor 
+.nf
+> 1.0 - scale up
+= 1.0 - no scaling
+< 1.0 - scale down
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

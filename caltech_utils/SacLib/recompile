@@ -1,0 +1,9 @@
+cd double/
+make cleanall
+make
+cd -
+cd single
+make cleanall
+make
+cd -
+

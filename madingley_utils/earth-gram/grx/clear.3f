@@ -1,0 +1,17 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CLEAR 3F "%G%"
+.SH NAME
+clear \- clear the niceplot window
+.SH SYNOPSIS
+\fBcall clear()\fP
+.fi
+.SH DESCRIPTION
+The FORTRAN subroutine \fBclear()\fP causes the niceplot window to be cleared.
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

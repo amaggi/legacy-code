@@ -1,0 +1,1123 @@
+c
+c*******************************************************************************
+c
+c    Subroutine axis
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine axis(xdim,ydim,xmarg,ymarg,xlow,ylow,xmax,xmin,
+     1  ymax,ymin,dxsmal,dxnumb,dysmal,dynumb,
+     2  fmtx,fmty,labelx,labely,title,iclear)
+c
+c    routine axis will draw a box with tic marks, label the x and y axes
+c    and label the plot with a title.
+c
+c    inputs  - xdim   = x dimension of the box in inches
+c              ydim   = y dimension of the box in inches
+c              xmarg  = margin below the x-axis in inches - determines
+c			the vertical spacing of the x-axis label
+c              ymarg  = margin to the left of the y-axis in inches - determines
+c			the horizontal spacing of the y-axis label
+c              xlow   = x-location of the lower left hand corner of the box
+c			in inches from the lower left hand corner of the
+c			plot
+c              ylow   = y-location etc.
+c              xmax   = x value of the right edge of the box in user units
+c              xmin   = x value of the left edge of the box in user units
+c              ymax   = y value of the top of the box in user units
+c              ymin   = y value of the bottom of the box in user units
+c              dxsmal = increment between small tic marks along the
+c			x-axis without number labelling
+c              dxnumb = increment between large tic marks along the
+c                       x-axis with number labelling
+c              dysmal,dynumb = etc. for y-axis
+c              fmtx   = character string format specification including
+c			paranthesis which determines the x-axis numerical
+c			labeling format
+c              fmty   = etc. for the y-axis
+c              labelx = character string label for the x-axis
+c              labely = etc. for y-axis
+c              title  = character string title which is placed on top
+c			of the plot
+c              iclear = clear flag.
+c			= 0 - Dont clear plot area before drawing axes.
+c			= 1 - Clear plot area before drawing axes.
+c
+      character*(*) labelx,labely,title,fmtx,fmty
+c
+c
+c*******************************************************************************
+c
+c    Subroutine number
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine number(x,y,ang,iref,xnum,fmt)
+c
+c    routine number causes a number to be printed on a plot
+c
+      character*(*) fmt
+      character*40 numb, numb2
+c
+c*******************************************************************************
+c
+c    Subroutine box
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine box(xleft,xright,ybot,ytop,thick,ithick,iclip)
+c
+c    routine box draws a box
+c
+c    inputs  - xleft  = horizontal location of left edge of box in user units
+c	       xright = horizontal location of right edge of box in user units
+c	       ybot   = vertical location of bottom edge of box in user units
+c	       ytop   = vertical location of top edge of box in user units
+c	       thick  = thickness of lines making up box in inches
+c              ithick = thickness flag
+c	       iclip  = clip flag see routine plot1
+c
+      dimension x(9),y(9)
+c
+c*******************************************************************************
+c
+c    Subroutine cfont
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine cfont(jfont)
+c
+c    Subroutine CFONT changes the font used for text labelling.
+c
+c    input  - jfont  = font number
+c
+c                      Hershey vector font family:
+c                      = 1 - KRoman
+c                      = 2 - KGreek
+c                      = 3 - SRoman
+c                      = 4 - SGreek
+c                      = 5 - SScript
+c                      = 6 - PIRoman
+c                      = 7 - PIGreek
+c                      = 8 - PIItalics
+c                      = 9 - PNRoman
+c                      = 10 - PNGreek
+c                      = 11 - PNItalics
+c                      = 12 - DRoman
+c                      = 13 - CScript
+c                      = 14 - CCyrilic
+c                      = 15 - TRoman
+c                      = 16 - TItalics
+c                      = 17 - Gothic German
+c                      = 18 - Gothic English
+c                      = 19 - Gothic Italian
+c                      = 20 - Map symbols
+c                      = 21 - Math, Astronomical, and Astrological symbols
+c                      These are the original Hershey vector fonts for both
+c                      X-windows and PostScript.
+c
+c                      Hershey-PostScript font family:
+c                      112 - DRoman, Heletica
+c                      115 - TRoman, Times-Roman
+c                      116 - TItalics, Times-Italic
+c                      130 - TRoman, Palatino-Roman
+c                      131 - TItalics, Palatino-Italic
+c                      132 - TRoman, Palatino-Bold
+c                      These use the original Hershey vector fonts for the
+c                      screen, but PostScript fonts for hard copy output.
+c
+c    This subroutine allows for more than one font to be stored in core
+c    memory at a time depending on how the parameter variable NPMAX
+c    is set, however this will only affect the response time and will be
+c    otherwise transparent to the user.
+c
+c    parameters  -  NPMAX  = maximum number of words in the character stroke
+c                            array, IPOINT.  This must be set large enough
+c                            to accomodate AT LEAST the largest single font
+c                            that will be used (e.g. font 18 ~ 9000).
+c                            An error exit will occur if this number is set
+c                            too small.
+c                   LUFNT  = FORTRAN logical unit number for the binary
+c                            font file
+c
+      parameter  (NPMAX = 10000)
+      parameter  (LUFNT = 9)
+c
+c*******************************************************************************
+c
+c    Subroutine chrdir
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine chrdir(angle)
+c
+c    Subroutine CHRDIR will set the direction or orientation of text
+c    labelling.
+c
+c    input  - angle  = the angle in degrees measured positive
+c                      counter-clockwise from a horizontal line which
+c                      defines the orientation of a line of text
+c                      labelling
+c
+c*******************************************************************************
+c
+c    Subroutine chrsiz
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine chrsiz(height, ratio, slant)
+c
+c    Subroutine CHRSIZ will set the character size and slant of text
+c    labelling.
+c
+c    inputs  - height = character height always in inches regardless of
+c                       scaling.
+c              ratio  = ratio of character cell width to height relative
+c                       to "normal" (i.e. ratio=1. gives a "normal"
+c                       looking character)
+c              slant  = slant angle in degrees of character.  A positive
+c                       slant will cause the top of the character to be
+c                       displaced forward relative to the bottom of the
+c                       character.  Slant=0. gives no slant.
+c
+c
+c*******************************************************************************
+c
+c    Subroutine circle
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine circle(xc,yc,r,narc,iclose,iclip,thick,ithick)
+c
+c    routine circle will draw either a open or closed circle (open meaning
+c    a circle with a white center, closed a circle with a black center)
+c
+c    inputs  - xc     = x-coordinate of the center of the circle in user units
+c	       yc     = y-coordinate of the center of the circle in user units
+c              r      = radius of the circle in user units
+c			note:  If the user units are not isotropic with respect
+c			       to the physical plot map, then you will get
+c			       open and closed ellipses (whoopee!)
+c              narc   = number of straight line segments to approximate the
+c			circle with
+c              iclose = open-closed flag
+c			= 0 - circle open
+c			.ne. 0 - circle closed
+c              iclip  = clip flag see nplot
+c              thick  = line thickness see nplot
+c			note: this is passed to nplot along with iclip.
+c 			      This allows big open circles with thick
+c			      circumferences. Probably should not be used
+c			      for closed circles.
+c              ithick = thickness flag see nplot
+c
+c*******************************************************************************
+c
+c    Subroutine clear
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine clear
+c
+c     routine clear causes the screen to clear.
+c
+c*******************************************************************************
+c
+c    Subroutine clrrgn
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine clrrgn(xmn,xmx,ymn,ymx)
+c
+c    routine clrrgn will clear out a region.
+c
+c*******************************************************************************
+c
+c    Subroutine cpyrgn
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine cpyrgn(xmn,xmx,ymn,ymx)
+c
+c    routine cpyrgn will copy a region from the pixmap to the window. This is
+c    usually used in conjunction with plot batching.
+c
+c
+c*******************************************************************************
+c
+c    Subroutine cursor
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      SUBROUTINE CURSOR(X, Y, CHR)
+C
+C    DJH  3/29/83
+C
+C    Subroutine CURSOR will enable the cross-hair graphics input mode and
+C    read in the position of the cursor. Note that the appearance of the
+C    cursor is controlled by a prior call to setcursor() and cursor tracking
+C    can be done with a prior call to trackcursor().
+C
+C    inputs -  X      = X-coordinate in user units for prepositioning cursor
+C              Y      = Y-coordinate in user units for prepositioning cursor
+C
+C    outputs - X      = X-coordinate in user units of input cursor position
+C              Y      = Y-coordinate in user units of input cursor position
+C              CHR    = character which was typed to initiate read
+C
+      CHARACTER*(*) CHR
+c
+c*******************************************************************************
+c
+c    Subroutine setcursor
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setcursor(type, param1, param2)
+C
+C    DJH  3/29/83
+C
+C    Subroutine setcursor will set the appearance of the graphics cursor.
+C    This should be called prior to cursor().
+C
+C    inputs -  type   = Cursor type.
+C			- crosshairs	= Normal crosshairs (default).
+C			- x_window	= Two vertical lines centered about
+C					  the cursor defining a
+C					  horizontal window.
+C			- y_window	= Two horizontal lines centered about
+C					  the cursor defining a
+C					  vertical window.
+C			- box		= A rectangle centered on the cursor.
+C	       param1, param2
+C		      = Associated parameters according to type.
+C			type		definitions
+C			crosshairs	Not used.
+C			x_window	param1 = horizontal window width.
+C			y_window	param1 = vertical window width.
+C			box		param1 = horizontal box width.
+C					param2 = vertical box width.
+C
+      CHARACTER*(*) type
+c
+c*******************************************************************************
+c
+c    Subroutine trackcursor
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine trackcursor(callback)
+C
+C    DJH  3/29/83
+C
+C    Subroutine trackcursor will cause a user supplied callback subroutine
+C    to be called whenever the cursor is moved or drawn.  This should be 
+C    called prior to cursor(). A call to trackcursoroff() should be made
+C    to disable cursor tracking.
+C
+C    inputs -  callback   = Callback subroutine which must be declared
+C			    as an EXTERNAL in the calling program.
+C
+c
+c*******************************************************************************
+c
+c    Subroutine trackcursoroff
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine trackcursoroff
+C
+C    DJH  3/29/83
+C
+C    Subroutine trackcursoroff will disable cursor tracking.
+C
+c
+c*******************************************************************************
+c
+c    Subroutine finitt
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine finitt
+c
+c    This subroutine should be called when plotting is finished.
+c
+c
+c*******************************************************************************
+c
+c    Subroutine getchr
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine getchr(c, nstrks, npoint, ioff, ix, iy)
+c
+c    Subroutine GETCHR will return the plot points
+c    for a particular character of a particular font.  Subroutine CFONT
+c    must be called prior to a call to this subroutine in order to specify
+c    the font.  An error exit will occur if this is not the case.
+c
+c    input   - c      = character (CHARACTER*1)
+c
+c    outputs - nstrks = number of strokes in the character
+c              npoint(nstrks) = number of plot points per stroke
+c              ioff(nstrks) = beginning point in IX and IY arrays per stroke
+c              ix,iy = plot point arrays
+c
+c
+c*******************************************************************************
+c
+c    Subroutine getsiz
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine getsiz(c, ihite, iwidth)
+c
+c    Subroutine GETSIZ will return the height and width
+c    for a particular character of a particular font.  Subroutine CFONT
+c    must be called prior to a call to this subroutine in order to specify
+c    the font.  An error exit will occur if this is not the case.
+c
+c    input   - c      = character (CHARACTER*1)
+c
+c    outputs - ihite  = character height
+c              iwidth = character width
+c
+c    parameter NPMAX defined in subroutine CFONT
+c
+	subroutine resamp( rdat, image, w, h, ww, hh,
+     +		xoff, yoff, depth, hd_depth )
+
+
+	subroutine setmono( x, out, bpl, w, h, col, rv )
+
+	implicit	none
+
+	integer		bpl
+	integer		w, h
+	integer		x(w,h)
+c	byte		out(bpl,4*h)
+	character	out(bpl,4*h)
+	integer		col(4,17)
+	integer		rv
+
+
+
+	subroutine setgrey( x, out, bpl, w, h, col, rv )
+
+	implicit	none
+
+	integer		bpl
+	integer		w, h
+	integer		x(w,h)
+c	byte		out(bpl,4*h)
+	character	out(bpl,4*h)
+	integer		col(4,17)
+	integer		rv
+
+
+
+	subroutine setmncol( gray, fg )
+
+c
+c	setmncol
+c
+c	Set the z to color conversion table for the case of a monochrome
+c	display.
+c
+c	For a monochrome screen to get more than just two color shades, must
+c	use a dithering technique.  Setmncol uses an n = 4 dither and packs
+c	the results such that the pixels values can be specified using an
+c	BYTE declared array.
+c
+c	Here col(1,i) is the top row of the dither matrix for an intensity of i.
+c	E.g. :  for and intensity of 7 the dither matrix would look like:
+c
+c	1 0 1 0		col(1,7) = binary number 1010 = decimal number 10
+c	0 1 0 1
+c	1 0 1 0
+c	0 0 0 1		col(4,7) = binary number 0001 = decimal number 1
+c
+c	All the values for col(i,j) have been pre-computed and are therefore
+c	exactly specified below.
+c
+
+c	implicit	none
+
+	integer		gray(4,17)
+	integer		fg
+
+	subroutine setgrcol( col )
+
+c
+c	setgrcol
+c
+c	Set the z to color conversion table for the case of a monochrome
+c	display.
+c
+c	For a monochrome screen to get more than just two color shades, must
+c	use a dithering technique.  Setgrcol uses an n = 4 dither and packs
+c	the results such that the pixels values can be specified using an
+c	BYTE declared array.
+c
+
+c	implicit	none
+
+	integer		col(4,17)
+
+
+	subroutine lgnd( n, z, dz )
+c
+c*******************************************************************************
+c
+c    Subroutine initt
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine initt(itran, plotfile, display, program, 
+     1                        ssize, xwin, ywin)
+c
+c    routine initt is an initialization routine which MUST BE CALLED prior
+c    to any of the other plot calls.  It need be called only once to
+c    properly initialize the connection to the X server and the
+c    postscript plot file.
+c
+c    inputs  - itran  	= flag which indicates which mode for plotting
+c			  = 0 - Portrait mode
+c			  .ne. 0 - Landscape mode
+c              plotfile	= The name of a postscript plot file. If this string
+c			  is empty, then a default file named "plotfile"
+c			  will be created. If this string is "none", then
+c			  no postcript output will be produced.
+c              display	= The name of the X server to connect to. If this
+c			  string is empty, then the the environment
+c			  variable DISPLAY is used to define the X server.
+c              program	= A program name that is displyed in the X window
+c			  title bar and the icon.
+c              ssize	= The initial size of the window in screen units
+c			  (0.0 - 1.0). In portrait mode this is the height of
+c			  the screen and in landscape mode this is the width
+c			  of the window.
+c              xwin,ywin
+c			= The initial x-y location of the window in screen
+c			  units. 
+c
+      character*(*) plotfile, display, program
+c
+c*******************************************************************************
+c
+c    Subroutine line
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine line(x1,y1,x2,y2,thick,ithick,iclip)
+c
+c    routine line draws a line from coordinates (x1,y1) to (x2,y2)
+c    are as in routine box.
+c
+c*******************************************************************************
+c
+c    Subroutine llaxis
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine llaxis(xdim,ydim,xmarg,ymarg,xlow,ylow,xmax,xmin,
+     1                  ymax,ymin,labelx,labely,title,iclear)
+c
+c    routine llaxis will draw a box with tic marks, label the x and y axes
+c    and label the plot with a title. This routine is similar to axis
+c    except that llaxis will make a axes for a log-log plot.
+c
+c    inputs  - xdim   = x dimension of the box in inches
+c              ydim   = y dimension of the box in inches
+c              xmarg  = margin below the x-axis in inches - determines
+c			the vertical spacing of the x-axis label
+c              ymarg  = margin to the left of the y-axis in inches - determines
+c			the horizontal spacing of the y-axis label
+c              xlow   = x-location of the lower left hand corner of the box
+c			in inches from the lower left hand corner of the
+c			plot
+c              ylow   = y-location etc.
+c              xmax   = x value of the right edge of the box in user units
+c              xmin   = x value of the left edge of the box in user units
+c              ymax   = y value of the top of the box in user units
+c              ymin   = y value of the bottom of the box in user units
+c              labelx = character string label for the x-axis
+c              labely = etc. for y-axis
+c              title  = character string title which is placed on top
+c			of the plot
+c              iclear = clear flag for tektronix (if .ne. 0 then clear)
+c
+      character*(*) labelx,labely,title
+c
+c*******************************************************************************
+c
+c    Subroutine ltype
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine ltype(n)
+c
+c    routine ltype sets the line type for graphing.
+c
+c     n  =  0 - solid
+c        =  1 - dotted
+c        =  2 - dot-dashed
+c        =  3 - short-dashed
+c        =  4 - long-dashed
+c
+c
+c*******************************************************************************
+c
+c    Subroutine ncontour
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine ncontour (nx, nxmax, ny, x, y, z, ctype, zmin, zmax,
+     1                     dz)
+c
+      integer              nx
+      integer                  nxmax
+      integer                      ny
+      real*4                           x(nx)
+      real*4                              y(ny)
+      real*4                                 z(nxmax,ny)
+      character*(*)                             ctype
+      real*4                                           zmin
+      real*4                                                 zmax
+      real*4               dz
+c
+c    Subroutine ncontour will render line and/or color contours for displaying
+c    z = z(x,y) in "map" view. Limits and scales for the x-y axes must be
+c    previously established with calls to setdim, setscl, or axis. z(x,y)
+c    must be specified as a regular rectangular grid of points.
+c
+c    Inputs  -	nx	= The number of x-coordinates in the grid.
+c    		ny	= The number of y-coordinates in the grid.
+c    		x(nx)	= The x-coordinates. Repeated values are not allowed
+c			  and the points must either increase or decrease
+c			  monotonically.
+c    		y(ny)	= The y-coordinates. Repeated values are not allowed
+c			  and the points must either increase or decrease
+c			  monotonically.
+c		z(nxmax,ny)	
+c			= The z(x,y) values for each x-y grid point. These
+c			  must be given in x order first.
+c		ctype	= The contour type flag.
+c			  = 'lines'  - Make line contours only.
+c			  = 'colors' - Make color contours only.
+c			  = 'both'   - Make line contours on top of color
+c				       contours.
+c		zmin	= The minimum z-value for contour clipping.
+c		zmax	= The maximum z-value for contour clipping. If 
+c			  zmax = zmin, then no clipping will take place and
+c			  internal values of zmin and zmax will be computed
+c			  automatically from the range of the data.
+c		dz    	= The z contour line increment. If dz <= 0.0, then
+c			  a "nice" increment will be chosen.
+c
+c    Output -	dz	= Chosen "nice" increment in input dz <= 0.0
+c
+c
+c*******************************************************************************
+c
+c    Subroutine nlstyl
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      SUBROUTINE NLSTYL(I)
+C
+C    This routine will set the graphics line style
+C
+c
+c*******************************************************************************
+c
+c    Subroutine nplot
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine nplot(n,x,y,igraf,iclip,thick,ithick,asymb)
+c
+c    routine nplot will plot a set of points specified by the arrays x
+c    and y
+c
+c    inputs  - n      = number of points to plot
+c              x      = plot data horizontal coordinate array
+c              y      = plot data vertical coordinate array
+c              igraf  = plot flag
+c			< 0 - plot only symbols with no lines
+c			= 0 - plot only lines with no symbols
+c			> 0 - plot both lines and symbols
+c	       iclip  = clipping flag see routine plot1
+c              thick  = thickness of line in inches on the versatek
+c              ithick = flag which controls whether line is thickened
+c			symeterically about the center or asymetrically
+c			= 0 - symetrically
+c			.gt. 0 - thicken to the right in the direction of
+c				 plotting
+c			.lt. 0 - thicken to the left
+c              asymb  = plotting symbol.  note:  if the number of points,
+c			n, is negative then it as assumed that asymb
+c			is an array of dimension n
+c
+c
+c*******************************************************************************
+c
+c    Subroutine npnimg
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine npnimg(image)
+c
+c    routine npnimg will paint an image onto the window.
+c
+c
+c
+c*******************************************************************************
+c
+c    Subroutine ntype
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine ntype(xtype,ytype)
+c
+c    Subroutine ntype defines the type of plot scales (linear or log).
+c
+c    Inputs  - xtype  = CHARACTER*3 string which defines whether the
+c                       horizontal axis is linear or logarithmic.
+c                       = 'LIN' - linear
+c                       = 'LOG' - logarithmic
+c              ytype  = CHARACTER*3 string which defines whether the
+c                       vertical axis is linear or logarithmic.
+c                       = 'LIN' - linear
+c                       = 'LOG' - logarithmic
+c
+      character*(*) xtype, ytype
+c
+c*******************************************************************************
+c
+c    Subroutine sclsiz
+c
+c*******************************************************************************
+c
+      subroutine sclsiz (scale)
+c
+      real*4             scale
+c
+c    sclsiz will scale character sizes either up, if scale is greater than 1.0,
+c    or down if scale is less than 1.0. scale = 1.0 corresponds to normal size.
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setbac
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setbac (hue, light, sat)
+c
+      real*4 hue
+      real*4 light
+      real*4 sat
+c
+c    Subroutine setbac will set the background color for subsequent plotting.
+c
+c    Inputs  -	hue	= The hue of the background color. (0.0 to 360.0
+c			  where 0.0 = red, 120.0 = green, 240.0 = blue)
+c		light	= The lightness of the background color. (0.0 to 1.0
+c			  where 0.0 is always black, 1.0 is always white and
+c			  0.5 is a pure color when sat = 1.0. light is a gray
+c			  scale when sat = 0.0)
+c		sat	= The saturation of the background color. (0.0 to 1.0
+c			  where 0.0 means no color (gray scale) and 1.0 means
+c			  pure color when light = 0.5)
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setbg
+c
+c    Author - Ben Kohl
+c
+c*******************************************************************************
+c
+      subroutine setbg (color)
+c
+      character*(*) color
+c
+c    Subroutine setbg will set the background color for subsequent plotting.
+c
+c    Inputs  -	color	= The name of the color of the background.  This
+c			  name follows the naming convention of X11, e.g.
+c			  "black", "white", "lightBlue", "#2fa".
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setctb
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setctb (nc, h, l, s, ictg, ipixel, ierr)
+c
+      integer*4          nc
+      real*4                 h(nc)
+      real*4                    l(nc)
+      real*4                       s(nc)
+      integer*4                       ictg
+      integer*4                             ipixel(nc)
+      integer*4                                     ierr
+c
+c    setctb will attempt to define a color table. See setfor for definitions
+c    of hue lightness and saturation.
+c
+c    Inputs  -	nc	= The number of entries in the color table.
+c		h(nc)	= The hues of each color in the table.
+c		l(nc)	= The lightnesses of each color in the table.
+c		s(nc)	= The saturations of each color in the table.
+c		ictg	= Contiguity flag.
+c			  = 0 - The returned pixels need not be contiguous.
+c			  = 1 - The returned pixels must be contiguous.
+c
+c    Outputs -	ipixel(nc)
+c			= The pixel values corresponding to each requested
+c			  color.
+c		ierr	= An error flag.
+c			  = 0 - No errors.
+c			  = 1 - Too many colors requested.
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setdim
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setdim(xdim,ydim,xlow,ylow)
+c
+c    routine setdim sets the physical dimensions of the plot and must be
+c    called prior to a call to setscl.
+c
+c    inputs  - xdim   = horizontal dimension in inches
+c 	       ydim   = vertical dimension in inches
+c	       xlow   = horizontal location of lower left hand corner of plot
+c			in inches
+c	       ylow   = vertical location of lower left hand corner of plot
+c			in inches
+c
+      subroutine getfrm (xmin, xmax, ymin, ymax)
+c
+      subroutine getdim (xdim,ydim,xlow,ylow)
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setfg
+c
+c    Author - Ben Kohl
+c
+c*******************************************************************************
+c
+      subroutine setfg (color)
+c
+      character*(*) color
+c
+c    Subroutine setfg will set the foreground color for subsequent plotting.
+c
+c    Inputs  -	color	= The name of the color of the foreground.  This
+c			  name follows the naming convention of X11, e.g.
+c			  "black", "white", "lightBlue", "#2fa".
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setfor
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setfor (hue, light, sat)
+c
+      real*4 hue
+      real*4 light
+      real*4 sat
+c
+c    Subroutine setfor will set the foreground color for subsequent plotting.
+c
+c    Inputs  -	hue	= The hue of the foreground color. (0.0 to 360.0
+c			  where 0.0 = red, 120.0 = green, 240.0 = blue)
+c		light	= The lightness of the foreground color. (0.0 to 1.0
+c			  where 0.0 is always black, 1.0 is always white and
+c			  0.5 is a pure color when sat = 1.0. light is a gray
+c			  scale when sat = 0.0)
+c		sat	= The saturation of the foreground color. (0.0 to 1.0
+c			  where 0.0 means no color (gray scale) and 1.0 means
+c			  pure color when light = 0.5)
+c
+c
+c*******************************************************************************
+c
+c    Subroutine setscl
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine setscl(xmin,xmax,ymin,ymax)
+c
+c    routine setscl sets the scale factors for the plot.  It must be called
+c    after the call to setdim
+c
+c    inputs  - xmin   = value of plot data corresponding to the left hand edge
+c			of the plot
+c	       xmax   = value of plot data corresponding to the right hand edge
+c			of the plot
+c	       ymin   = value of plot data corresponding to the bottom edge
+c			of the plot
+c	       ymax   = value of plot data corresponding to the top edge
+c			of the plot
+c
+      subroutine getclp (xmin, xmax, ymin, ymax)
+c
+      subroutine getscl (xmin, xmax, ymin, ymax)
+c
+c
+c*******************************************************************************
+c
+c    Subroutine text
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine text(x, y, angle, iref, string, iclip)
+c
+c    Subroutine TEXT will cause a text string to be plotted.
+c
+c    inputs  - x      = reference X-coordinate in user units
+c              y      = reference Y-coordinate in user units
+c              angle  = polar orientation of character string about point
+c                       (x,y) measured in degrees counter-clockwise about
+c                       the X-axis
+c              iref   = flag which defines the reference point (x,y) relative
+c                       to the character string
+c                       = 0 - (x,y) is at lower left hand corner of string
+c                       = 1 - (x,y) is at center of left hand edge of string
+c                       = 2 - (x,y) is at top left hand corner of string
+c                       = 3 - (x,y) is at bottom center of string
+c                       = 4 - (x,y) is at center of string
+c                       = 5 - (x,y) is at top center of string
+c                       = 6 - (x,y) is at lower right hand corner of string
+c                       = 7 - (x,y) is at center of right hand edge of string
+c                       = 8 - (x,y) is at top right hand corner of string
+c              string = character string to be plotted
+c              iclip  = clip flag
+c                       = 0 - clip
+c                       .ne. 0 - do not clip
+c
+      character*(*) string
+c
+c
+c*******************************************************************************
+c
+c    Subroutine tics
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+      subroutine tics(x1,y1,x2,y2,stic,ntic,dtic,tlen,thick,idir)
+c
+c    routine tics draws tic marks
+c
+c    inputs  - x1     = x coordinate of starting point of axis in user units
+c              y1     = y coordinate of starting point af axis in user units
+c              x2     = x coordinate of ending point af axis in user units
+c              y2     = y coordinate of ending point af axis in user units
+c              stic   = position along axis from (x1,y1) for first tic mark
+c			in user units
+c              ntic   = number of tic marks
+c              dtic   = increment along axis for tic marks in user units
+c              tlen   = length of tic marks IN INCHES
+c              thick  = thickness of tic marks IN INCHES
+c              idir   = flag which defines orientation of tic marks
+c			(directions given for (x2,y2) directly to the
+c			right of (x1,y1))
+c			> 0 - tic marks point up
+c			= 0 - tic marks point on both sides
+c			< 0 - tic marks point down
+c
+c
+c*******************************************************************************
+c
+c    Subroutines xmap,ymap
+c
+c    Author - Danny Harvey
+c
+c*******************************************************************************
+c
+c    The following function routine maps from plot data units to
+c    raster units 
+c
+      function xmap(x)
+c
+c    horizontal plot map
+c
+      function ymap(y)
+c
+c    vertical plot map
+c
+/*
+ ******************************************************************************
+ *
+ *	Function hdbatoff_
+ *
+ *	Author - Danny Harvey
+ *
+ ******************************************************************************
+ */
+
+int hd_batch;
+
+void
+hdbatoff_()
+
+/*
+ *	hdbatoff_ will disable plot batching which causes plotting to occur
+ *	in the pixmap and also in the current window.
+ */
+
+/*
+ ******************************************************************************
+ *
+ *	Function hdbaton_
+ *
+ *	Author - Danny Harvey
+ *
+ ******************************************************************************
+ */
+
+int hd_batch;
+
+void
+hdbaton_()
+
+/*
+ *	hdbaton_ will enable plot batching which causes plotting to ONLY occur
+ *	in the pixmap and not in the current window.
+ */
+
+{
+	hd_batch = 1;
+}
+
+void
+hdrefresh_ ()
+
+/*
+ *	hdrefresh_ will refresh the whole screen.
+ */
+
+/*
+ ******************************************************************************
+ *
+ *	Function hdkild_
+ *
+ *	Author - Danny Harvey
+ *
+ ******************************************************************************
+ */
+
+void
+hdkild_()
+
+/*
+ *	hdkild_ will kill the niceplot plotting daemon program.
+ */
+
+/*
+ *******************************************************************************
+ *
+ *	FORTRAN callable subroutine hdptxwd
+ *
+ *	Author - Danny Harvey
+ *
+ *******************************************************************************
+ */
+
+
+void
+hdptxwd_ (xwd_file, imgx, imgy, n)
+
+char *xwd_file;
+int *imgx;
+int *imgy;
+int n;
+
+/*
+ *	hdptxwd will put the window image from the output of xwd into the
+ *	pixmap.
+ *
+ *	Inputs  -	xwd_file	= xwd output file name.
+ *			imgx		= Starting X-pixel in image grid.
+ *			imgy		= Starting Y-pixel in image grid.
+ */
+

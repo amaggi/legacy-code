@@ -1,0 +1,32 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SETBAC 3F "%G%"
+.SH NAME
+setbac \- set backround color
+.SH SYNOPSIS
+\fPcall setbac(hue, light, sat)\fB
+.TP 15
+\fBreal*4\fP
+\fBhue, light, sat\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBsetbac()\fP will set the background color for subsequent plotting.
+.SH ARGUMENTS
+.TP 15
+\fBhue\fP
+.SB (i)
+Sets the hue of the background color (0.0 to 360.0 where 0.0 = red, 120.0 = green, 240.0 = blue).
+.TP 15
+\fBlight\fP
+.SB (i)
+Sets the lightness of the background color (0.0 to 1.0 where 0.0 is always black, 1.0 is always white and 0.5 is a pure color when sat = 1.0. light is a gray scale when sat = 0.0).
+.TP 15
+\fBsat\fP
+.SB (i)
+Sets the saturation of the background color (0.0 to 1.0 where 0.0 means no color (gray scale) and 1.0 means pure color when light = 0.5).
+.SH "SEE ALSO"
+\fBniceplot(3f), setbg(3f)\fP
+.SH AUTHOR
+Danny Harvey

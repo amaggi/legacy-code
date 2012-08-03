@@ -1,0 +1,60 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CFONT 3F "%G%"
+.SH NAME
+cfont \- change niceplot font
+.SH SYNOPSIS
+.HP 15
+\fBcall cfont(jfont)\fP
+.IP \fBinteger\fP 15
+\fBjfont\fP
+.SH DESCRIPTION
+Subroutine \fBcfont()\fP changes the font used for text labelling
+.SH ARGUMENTS
+.IP \fBjfont\fP 15
+.SB (i)
+Specifies the font mapping
+
+.nf
+Hershey vector font family:
+1  - KRoman
+2  - KGreek
+3  - SRoman
+4  - SGreek
+5  - SScript
+6  - PIRoman
+7  - PIGreek
+8  - PIItalics
+9  - PNRoman
+10 - PNGreek
+11 - PNItalics
+12 - DRoman
+13 - CScript
+14 - CCyrilic
+15 - TRoman
+16 - TItalics
+17 - Gothic German
+18 - Gothic English
+19 - Gothic Italian
+20 - Map symbols
+21 - Math, Astronomical, and Astrological symbols
+These are the original Hershey vector fonts for both
+X-windows and PostScript.
+
+Hershey-PostScript font family:
+112 - DRoman, Heletica
+115 - TRoman, Times-Roman
+116 - TItalics, Times-Italic
+130 - TRoman, Palatino-Roman
+131 - TItalics, Palatino-Italic
+132 - TRoman, Palatino-Bold
+These use the original Hershey vector fonts for the
+screen, but PostScript fonts for hard copy output.
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

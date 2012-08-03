@@ -1,0 +1,88 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH AXIS 3F "%G%"
+.SH NAME
+axis \- draw niceplot axes
+.SH SYNOPSIS
+.HP 15
+\fBcall axis(xdim, ydim, xmarg, ymarg, xlow, ylow, xmax, xmin, ymax, ymin, dxsmal, dxnumb, dysmal, dynumb, fmtx, fmty, labelx, labely, title, iclear)\fP
+.IP \fBreal\fP 15
+\fBxdim, ydim, xmarg, ymarg, xlow, ylow, xmax, xmin, ymax, ymin, dxsmal, dxnumb, dysmal, dynumb\fP
+.IP \fBcharacter*(*)\fP 15
+\fBfmtx, fmty, labelx, labely, title \fP
+.IP \fBinteger\fP 15
+\fBiclear\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBaxis()\fP draws a box with tic marks, labels the x and y axes and labels the plot with a title.
+.SH ARGUMENTS
+.IP \fBxdim\fP 15
+.SB (i)
+X dimension of the box in inches.
+.IP \fBydim\fP 15
+.SB (i)
+Y dimension of the box in inches.
+.IP \fBxmarg\fP 15
+.SB (i)
+The margin below the x-axis in inches, determines the vertical spacing of the x-axis label.
+.IP \fBymarg\fP 15
+.SB (i)
+The margin to the left of the y-axis in inches, determines the horizontal spacing of the y-axis label.
+.IP \fBxlow\fP 15
+.SB (i)
+X-location of the lower left hand corner of the box in inches from the lower left hand corner of the plot.
+.IP \fBylow\fP 15
+.SB (i)
+Y-location of the lower left hand corner of the box in inches from the lower left hand corner of the plot.
+.IP \fBxmax\fP 15
+.SB (i)
+X value of the right edge of the box in user units.
+.IP \fBxmin\fP 15
+.SB (i)
+X value of the left edge of the box in user units.
+.IP \fBymax\fP 15
+.SB (i)
+Y value of the top of the box in user units.
+.IP \fBymin\fP 15
+.SB (i)
+Y value of the bottom of the box in user units.
+.IP \fBdxsmal\fP 15
+.SB (i)
+Increment between small tic marks along the x-axis without number labelling.
+.IP \fBdxnumb\fP 15
+.SB (i)
+Increment between large tic marks along the x-axis with number labelling.
+.IP \fBdysmal\fP 15
+.SB (i)
+Increment between small tic marks along the y-axis without number labelling.
+.IP \fBdynumb\fP 15
+.SB (i)
+Increment between large tic marks along the y-axis with number labelling.
+.IP \fBfmtx\fP 15
+.SB (i)
+The character string format specification including paranthesis which determines the x-axis numerical labeling format.
+.IP \fBfmty\fP 15
+.SB (i)
+The character string format specification including paranthesis which determines the y-axis numerical labeling format.
+.IP \fBlabelx\fP 15
+.SB (i)
+The character string label for the x-axis.
+.IP \fBlabely\fP 15
+.SB (i)
+The character string label for the y-axis.
+.IP \fBtitle\fP 15
+.SB (i)
+The character string title which is placed on top of the plot.
+.IP \fBiclear\fP 15
+.SB (i)
+Clear area flag.
+.nf
+0 - Dont clear plot area before drawing axes
+1 - Clear plot area before drawing axes
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f), laxis(3f), llaxis(3f)\fP
+.SH AUTHOR
+Danny Harvey

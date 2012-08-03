@@ -1,0 +1,1 @@
+sxf90 -C vopt  new_regeric3glob.lapack.f -o regeric3glob.lapack $LAPACK_I4R4R8

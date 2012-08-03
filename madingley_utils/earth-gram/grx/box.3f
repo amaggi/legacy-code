@@ -1,0 +1,43 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH BOX 3F "%G%"
+.SH NAME
+box \- draw a box
+.SH SYNOPSIS
+.HP 15
+\fBcall box(xleft, xright, ybot, ytop, thick, ithick, iclip)\fP
+.IP \fBreal\fP 15
+\fBxleft, xright, ybot, ytop, thick\fP
+.IP \fBinteger\fP 15
+\fBithick, iclip\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBbox()\fP draws a box in the niceplot window.
+.SH ARGUMENTS
+.IP \fBxleft\fP 15
+.SB (i)
+The horizontal location of left edge of box in user units.
+.IP \fBxright\fP 15
+.SB (i)
+The horizontal location of right edge of box in user units.
+.IP \fBybot\fP 15
+.SB (i)
+The vertical location of bottom edge of box in user units.
+.IP \fBytop\fP 15
+.SB (i)
+The vertical location of top edge of box in user units.
+.IP \fBthick\fP 15
+.SB (i)
+The thickness of lines making up box in inches.
+.IP \fBithick\fP 15
+.SB (i)
+Thickness flag.
+.IP \fBiclip\fP 15
+.SB (i)
+Clip flag (see \fBplot1(3f)\fP).
+.SH "SEE ALSO"
+\fBniceplot(3f), plot1(3f)\fP
+.SH AUTHOR
+Danny Harvey

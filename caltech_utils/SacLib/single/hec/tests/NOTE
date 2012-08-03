@@ -1,0 +1,14 @@
+the result of correlation is 
+a quite different from sac
+result, but our result is 
+the same as the brute force
+one, so it must be reasonable.
+The same situation is true for convolve.
+
+The hilbert transform is just 
+the sac hilbert adding a negative sign.
+
+The envelope is the same except that
+our result is a little smoother.
+
+Qinya tested at 06/03/03

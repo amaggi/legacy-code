@@ -1,0 +1,8 @@
+cd ../../
+make cleanall
+make
+cd -
+make clean
+make
+testsaclib 
+

@@ -1,0 +1,39 @@
+obj =   rotate.o pitsa.o peripheral.o \
+	datetime.o in_sac.o out_sac.o slresp.o \
+	irisresp.o char_int.o respc.o evresp.o
+
+rotate: $(obj)
+	f77 $(obj) -g -o rotate /usr/local/sac2000/sunos/lib/libsac_old.a
+
+rotate.o : rotate.f 
+	f77  -g -c rotate.f
+
+pitsa.o: /dione/Codes/SWcodes/common_files/pitsa.f 
+	f77  -g -c /dione/Codes/SWcodes/common_files/pitsa.f
+
+peripheral.o: /dione/Codes/SWcodes/common_files/peripheral.f 
+	f77  -g -c /dione/Codes/SWcodes/common_files/peripheral.f
+
+datetime.o : ../pit_sac/datetime.f
+	f77 -g -c ../pit_sac/datetime.f
+
+in_sac.o : ../pit_sac/in_sac.f
+	f77 -g -c ../pit_sac/in_sac.f
+
+out_sac.o : ../pit_sac/out_sac.f
+	f77 -g -c ../pit_sac/out_sac.f
+
+slresp.o : /dione/Codes/SWcodes/resp/slresp.f 
+	f77  -g -c /dione/Codes/SWcodes/resp/slresp.f
+
+irisresp.o : /dione/Codes/SWcodes/resp/irisresp.f
+	f77  -O -c /dione/Codes/SWcodes/resp/irisresp.f
+
+char_int.o : /dione/Codes/SWcodes/resp/char_int.f
+	f77  -O -c /dione/Codes/SWcodes/resp/char_int.f
+
+respc.o : /dione/Codes/SWcodes/resp/respc.c
+	cc  -O -c /dione/Codes/SWcodes/resp/respc.c
+
+evresp.o : /dione/Codes/SWcodes/resp/evresp.c
+	cc  -O -c /dione/Codes/SWcodes/resp/evresp.c

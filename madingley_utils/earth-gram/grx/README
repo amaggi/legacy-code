@@ -1,0 +1,21 @@
+X window version of niceplot
+
+Danny Harvey, August 1990, University of Colorado
+
+This version of niceplot provides full interactive X11 windows capability
+plus high resolution postscript output. These FORTRAN callable subroutines
+fork an X window plotting daemon program, nxplotd which must be available in
+the user's path. The plotting daemon is responsible for repairing the window
+and servicing the X event stream and the program runs concurrently with the
+user's program. This allows for simple tty-based command driven user interfaces
+without the programmer being required to learn about X-window toolkits and
+notifier based mouse driven interfaces.
+
+An optional high resolution postscript output file can be produced (see
+subroutine initt) which mimics the visual display.
+
+All fonts used by these subroutines are the vector Hershey fonts and a
+binary font file must be made available. The path to this font file must
+be specified in the subroutine cfont at compile time. An ASCII version of this
+font file is available from D. Harvey along with a program, readfont, which
+will read the ASCII file and produce the binary file.

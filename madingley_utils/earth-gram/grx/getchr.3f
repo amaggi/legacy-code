@@ -1,0 +1,45 @@
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH GETCHR 3F "%G%"
+.SH NAME
+getchr \- compute the outline of a character
+.SH SYNOPSIS
+\fBcall getchr(c, nstrks, npoint, ioff, ix, iy)\fP
+.TP 15
+\fBcharacter*1\fP
+\fBc\fP
+.TP 15
+\fBinteger*2\fP
+\fBnpoint(1), ioff(1)\fP
+.TP 15
+\fBreal\fP
+\fBix(1), iy(1)\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBgetchr()\fP will return the plot points for a particular character of a particular font.  Subroutine \fBcfont()\fP must be called prior to a call to this subroutine in order to specify the font.  An error exit will occur if this is not the case.
+.SH ARGUMENTS
+.TP 15
+\fBc\fP
+.SB (i)
+The character whose outline is to be computed.
+.TP 15
+\fBnstrks\fP
+.SB (o)
+The number of strokes that make up the computed character.
+.TP 15
+\fBnpoint(nstrks)\fP
+.SB (o)
+The number of plot points in each particular stroke.
+.TP 15
+\fBioff(nstrks)\fP
+.SB (o)
+The beginning index in plot point arrays for a particular stroke.
+.TP 15
+\fBix,iy\fP
+.SB (o)
+The plot point arrays.
+.SH "SEE ALSO"
+\fBniceplot(3f), cfont(3f)\fP
+.SH AUTHOR
+Danny Harvey

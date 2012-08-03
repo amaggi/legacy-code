@@ -1,0 +1,24 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH YMAP 3F "%G%"
+.SH NAME
+ymap \- covert from plotting to raster units
+.SH SYNOPSIS
+\fBymap(y)\fP
+.TP 15
+\fBreal\fP
+\fBy\fP
+.SH DESCRIPTION
+The FORTRAN function \fBymap()\fP maps from horizontal plot data units to horizontal raster units.
+.SH ARGUMENTS
+.TP 15
+\fBy\fP
+.SB (i)
+Y coordinate
+.SH "SEE ALSO"
+\fBniceplot(3f)\fp
+.SH AUTHOR
+Danny Harvey

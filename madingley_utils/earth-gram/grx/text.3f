@@ -1,0 +1,66 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH TEXT 3F "%G%"
+.SH NAME
+text \- plot a text string
+.SH SYNOPSIS
+\fBcall text(x, y, angle, iref, string, iclip)\fB
+.TP 15
+\fBreal\fP
+\fBx, y, angle\fP
+.TP 15
+\fBinteger\fP
+\fBiref, iclip\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBstring\fP
+.fi
+.SH DESCRIPTION
+The FORTRAN subroutine \fBtext()\fP will cause a text string to be plotted.
+.SH ARGUMENTS
+.TP 15
+\fBx\fP
+.SB (i)
+Reference x-coordinate in user units
+.TP 15
+\fBy\fP
+.SB (i)
+Reference y-coordinate in user units
+.TP 15
+\fBangle\fP
+.SB (i)
+Polar orientation of character string about point (x,y) measured in degrees counter-clockwise about the x-axis
+.TP 15
+\fBiref\fP
+.SB (i)
+Flag which defines the reference point (x,y) relative to the character string
+.nf
+0 - (x,y) is at lower left hand corner of string
+1 - (x,y) is at center of left hand edge of string
+2 - (x,y) is at top left hand corner of string
+3 - (x,y) is at bottom center of string
+4 - (x,y) is at center of string
+5 - (x,y) is at top center of string
+6 - (x,y) is at lower right hand corner of string
+7 - (x,y) is at center of right hand edge of string
+8 - (x,y) is at top right hand corner of string
+.fi
+.TP 15
+\fBstring\fP
+.SB (i)
+Character string to be plotted
+.TP 15
+\fBiclip\fP
+.SB (i)
+Clip flag
+.nf
+0 - clip
+1 - do not clip
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

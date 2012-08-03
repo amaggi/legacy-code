@@ -1,0 +1,30 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH LTYPE 3F "%G%"
+.SH NAME
+ltype \- set line type
+.SH SYNOPSIS
+\fBcall ltype(n)\fP
+.TP 15
+\fBinteger\fP
+\fBn\fP
+.SH DESCRIPTION
+FORTRAN routine \fBltype()\fP sets the line type for graphing.
+.SH ARGUMENTS
+.TP 15
+\fBn\fP
+Specifies which line style to use:
+.nf
+0 - solid
+1 - dotted
+2 - dot-dashed
+3 - short-dashed
+4 - long-dashed
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

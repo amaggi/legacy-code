@@ -1,0 +1,15 @@
+double precision version
+
+
+
+distaz.f
+extrma.f
+
+are taken from old sac (not sac2000) program
+and rewrite it a little bit, adding implicit
+none, and getting rid of the header files to
+make them callable from other C or fortran 
+programs.
+
+LQY
+

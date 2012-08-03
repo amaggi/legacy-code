@@ -1,0 +1,70 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH LLAXIS 3F "%G%"
+.SH NAME
+llaxis \- draw log-log niceplot axes
+.SH SYNOPSIS
+.HP 15
+\fBcall llaxis(xdim, ydim, xmarg, ymarg, xlow, ylow, xmax, xmin, ymax, ymin,  labelx, labely, title, iclear)\fP
+.IP \fBreal\fP 15
+\fBxdim, ydim, xmarg, ymarg, xlow, ylow, xmax, xmin, ymax, ymin\fP
+.IP \fBcharacter*(*)\fP 15
+\fBfmty, labelx, labely, title \fP
+.IP \fBinteger\fP 15
+\fBiclear\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBllaxis()\fP draws a box with tic marks, labels the x and y axes and labels the plot with a title.  This routine is similar to \fBaxis(3f)\fP except that it will make axes for a log-log plot.
+.SH ARGUMENTS
+.IP \fBxdim\fP 15
+.SB (i)
+X dimension of the box in inches.
+.IP \fBydim\fP 15
+.SB (i)
+Y dimension of the box in inches.
+.IP \fBxmarg\fP 15
+.SB (i)
+The margin below the x-axis in inches, determines the vertical spacing of the x-axis label.
+.IP \fBymarg\fP 15
+.SB (i)
+The margin to the left of the y-axis in inches, determines the horizontal spacing of the y-axis label.
+.IP \fBxlow\fP 15
+.SB (i)
+X-location of the lower left hand corner of the box in inches from the lower left hand corner of the plot.
+.IP \fBylow\fP 15
+.SB (i)
+Y-location of the lower left hand corner of the box in inches from the lower left hand corner of the plot.
+.IP \fBxmax\fP 15
+.SB (i)
+X value of the right edge of the box in user units.
+.IP \fBxmin\fP 15
+.SB (i)
+X value of the left edge of the box in user units.
+.IP \fBymax\fP 15
+.SB (i)
+Y value of the top of the box in user units.
+.IP \fBymin\fP 15
+.SB (i)
+The character string format specification including paranthesis which determines the y-axis numerical labeling format.
+.IP \fBlabelx\fP 15
+.SB (i)
+The character string label for the x-axis.
+.IP \fBlabely\fP 15
+.SB (i)
+The character string label for the y-axis.
+.IP \fBtitle\fP 15
+.SB (i)
+The character string title which is placed on top of the plot.
+.IP \fBiclear\fP 15
+.SB (i)
+Clear area flag.
+.nf
+0 - Dont clear plot area before drawing axes
+1 - Clear plot area before drawing axes
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f), axis(3f), laxis(3f)\fP
+.SH AUTHOR
+Danny Harvey

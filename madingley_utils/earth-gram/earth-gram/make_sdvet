@@ -1,0 +1,29 @@
+obj = sdvet.o earthsubs.o peripheral.o slresp.o \
+	irisresp.o char_int.o respc.o evresp.o
+
+sdvet: $(obj)
+	f77 $(obj) -g -o sdvet 
+
+sdvet.o : sdvet.f 
+	f77  -g -c sdvet.f
+
+peripheral.o: /dione/Codes/SWcodes/common_files/peripheral.f 
+	f77  -g -c /dione/Codes/SWcodes/common_files/peripheral.f
+
+earthsubs.o: /dione/Codes/SWcodes/common_files/earthsubs.f 
+	f77  -g -c /dione/Codes/SWcodes/common_files/earthsubs.f
+
+slresp.o : /dione/Codes/SWcodes/common_files/slresp.f
+	f77  -g -c /dione/Codes/SWcodes/common_files/slresp.f
+
+irisresp.o : /dione/Codes/SWcodes/resp/irisresp.f
+	f77  -O -c /dione/Codes/SWcodes/resp/irisresp.f
+
+char_int.o : /dione/Codes/SWcodes/resp/char_int.f
+	f77  -O -c /dione/Codes/SWcodes/resp/char_int.f
+
+respc.o : /dione/Codes/SWcodes/resp/respc.c
+	cc  -O -c /dione/Codes/SWcodes/resp/respc.c
+
+evresp.o : /dione/Codes/SWcodes/resp/evresp.c
+	cc  -O -c /dione/Codes/SWcodes/resp/evresp.c

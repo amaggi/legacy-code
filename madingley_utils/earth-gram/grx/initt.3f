@@ -1,0 +1,55 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH INITT 3F "%G%"
+.SH NAME
+initt \- initialize niceplot window
+.SH SYNOPSIS
+.HP 15
+\fBcall initt(itran, plotfile, display, program, ssize, xwin, ywin)\fP
+.TP 15
+\fBinteger\fP
+\fBitran\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBplotfile, display, program\fP
+.TP 15
+\fBreal\fP
+\fBssize, xwin, ywin\fP
+.SH DESCRIPTION
+The FORTRAN routine \fBinitt()\fP is an initialization routine which MUST BE CALLED prior to any of the other plot calls.  It need be called only once to properly initialize the connection to the X server and the postscript plot file.
+.SH ARGUMENTS
+.TP 15
+\fBitran\fP
+.SB(i)
+A flag which indicates which mode for plotting.
+.nf
+0 - Portrait mode
+1 - Landscape mode
+.fi
+.TP 15
+\fBplotfile\fP
+.SB(i)
+The name of a postscript plot file.  If this string is empty, then a default file named "plotfile" will be created.  If this string is "none", then no postcript output will be produced.
+.TP 15
+\fBdisplay\fP
+.SB(i)
+The name of the X server to connect to.  If this string is empty, then the the environment variable DISPLAY is used to define the X server.
+.TP 15
+\fBprogram\fP
+.SB(i)
+A program name that is displyed in the X window title bar and the icon.
+.TP 15
+\fBssize\fP
+.SB(i)
+The initial size of the window in screen units (0.0 - 1.0). In portrait mode this is the height of the screen and in landscape mode this is the width of the window.
+.TP 15
+\fBxwin,ywin\fP
+.SB(i)
+The initial x-y location of the window in screen units. 
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

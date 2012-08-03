@@ -1,0 +1,56 @@
+obj = gram.o mkhomog.o mkhetero.o plt_rtns.o \
+	peripheral.o fftl.o pitsa.o datafile.o \
+	datetime.o in_sac.o out_sac.o slresp.o \
+	irisresp.o char_int.o respc.o evresp.o
+
+gram: $(obj)
+	f77 $(obj) -O -o gram -L/dione/Codes/SWcodes/grx -lgrx -lX11 \
+	-lm /usr/local/sac2000/sunos/lib/libsac_old.a
+
+gram.o : gram.f 
+	f77  -O -c gram.f
+
+mkhomog.o : mkhomog.f 
+	f77  -O -c mkhomog.f
+
+mkhetero.o : mkhetero.f 
+	f77  -O -c mkhetero.f
+
+plt_rtns.o: /dione/Codes/SWcodes/plot_rtns/plt_rtns.f 
+	f77  -O -c /dione/Codes/SWcodes/plot_rtns/plt_rtns.f
+
+peripheral.o: /dione/Codes/SWcodes/common_files/peripheral.f 
+	f77  -O -c /dione/Codes/SWcodes/common_files/peripheral.f
+
+pitsa.o: /dione/Codes/SWcodes/common_files/pitsa.f 
+	f77  -O -c /dione/Codes/SWcodes/common_files/pitsa.f
+
+fftl.o : /dione/Codes/SWcodes/common_files/fftl.f 
+	f77  -O -c /dione/Codes/SWcodes/common_files/fftl.f
+
+datafile.o : /dione/Codes/SWcodes/grx/datafile.f
+	f77  -O -c /dione/Codes/SWcodes/grx/datafile.f
+
+datetime.o : ../pit_sac/datetime.f
+	f77 -O -c ../pit_sac/datetime.f
+
+in_sac.o : ../pit_sac/in_sac.f
+	f77 -O -c ../pit_sac/in_sac.f
+
+out_sac.o : ../pit_sac/out_sac.f
+	f77 -O -c ../pit_sac/out_sac.f
+
+slresp.o : /dione/Codes/SWcodes/resp/slresp.f
+	f77  -O -c /dione/Codes/SWcodes/resp/slresp.f
+
+irisresp.o : /dione/Codes/SWcodes/resp/irisresp.f
+	f77  -O -c /dione/Codes/SWcodes/resp/irisresp.f
+
+char_int.o : /dione/Codes/SWcodes/resp/char_int.f
+	f77  -O -c /dione/Codes/SWcodes/resp/char_int.f
+
+respc.o : /dione/Codes/SWcodes/resp/respc.c
+	cc  -O -c /dione/Codes/SWcodes/resp/respc.c
+
+evresp.o : /dione/Codes/SWcodes/resp/evresp.c
+	cc  -O -c /dione/Codes/SWcodes/resp/evresp.c

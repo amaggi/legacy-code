@@ -1,0 +1,16 @@
+#!/bin/sh
+
+make cleanrun
+
+./IntSYNTPREM-choice<< END
+intomodesVs.test 
+2
+2
+230 30 300 0 410 -0.04
+180 -60 400 0 410 -0.02
+1 5
+1
+-30 150 60 270
+END
+
+./plot-horizontal.sh VS.05.xyz

@@ -1,0 +1,29 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CHRSIZ 3F "%G%"
+.SH NAME
+chrsiz \- change size and slant of text labelling
+.SH SYNOPSIS
+.HP 15
+\fBcall chrsiz(height, ratio, slant)\fP
+.IP \fBreal\fP 15
+\fBheight, ratio, slant\fP
+.SH DESCRIPTION
+Subroutine \fBchrsiz()\fP will set the character size and slant of text labelling.
+.SH ARGUMENTS
+.IP \fBheight\fP 15
+.SB (i)
+Character height always in inches regardless of scaling.
+.IP \fBratio\fP 15
+.SB (i)
+The ratio of character cell width to height relative to "normal" (i.e. ratio=1. gives a "normal" looking character).
+.IP \fBslant\fP 15
+.SB (i)
+Slant angle in degrees of character.  A positive slant will cause the top of the character to be displaced forward relative to the bottom of the character.  Slant = 0 gives no slant.
+.SH "SEE ALSO"
+\fBniceplot(3f), chrdir(3f)\fP
+.SH AUTHOR
+Danny Harvey

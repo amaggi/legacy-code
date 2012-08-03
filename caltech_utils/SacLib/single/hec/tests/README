@@ -1,0 +1,65 @@
+libHilEnv.a
+
+------
+xcorr.o
+
+int xcorr(const double *data, int ndata,
+          const double *syn, int nsyn,
+          double *corr, int *nshift)
+  ** input : data array, data length
+             syn array, syn length
+  ** output : corr array, and shift array
+  ** return number of corr array length, 0 means error.
+
+FORTRAN WRAPER -- 
+int xcorr_(const double *data, int *pndata,
+           const double *syn, int *pnsyn,
+           double *corr, int *nshift)
+
+----
+crosscorr.o  -- USE FFT
+
+int crosscorr(const double *data, int ndata,
+	      const double *syn, int nsyn,
+              double *corr)
+  ** input : data array, data length
+             syn array, syn length
+  ** output : corr array
+  ** return the c-index of zero shift
+
+FORTRAN WRAPER -- 
+int crosscorr_(const double *data, int *pndata,
+               const double *syn, int *pnsyn,
+               double *corr)
+  ** return the fortran-index of zero shift
+
+NOTE : SYN SHIFT TO LEFT MEANS NEGATIVE SHIFT
+       SO SHIFTS ARE FROM 1-NSYN TO NDATA-1
+
+autocorr.o 
+int autocorr(const double *data, int ndata,
+             double *corr)
+
+FORTRAN WRAPPER --
+int autocorr_(const double *data,int *pndata,
+              double *corr)
+
+-------
+hilenv.o
+
+int envelope(int numsamp,const double *f,double *fenv)
+  ** input : number of samples,
+             original array f
+  ** output : envelope array
+  ** return 0 if o.k.
+
+int hilbert(int numsamp,const double *f,double *fhilb)
+  ** input : number of samples
+             original array f
+  ** output : hilbert transform array
+  ** return 0 if o.k.
+
+FORTRAN WRAPERS ---
+
+int envelope_(const int *numsamp,const double *f,double *fenv)
+int hilbert_(const int *numsamp,double *f,double *fhilb)

@@ -1,0 +1,28 @@
+#!/bin/sh
+name=$1
+
+rdseed << END
+$name
+
+1
+d
+
+
+
+
+
+1
+y
+3
+e
+
+
+
+y
+END
+
+mkdir PZ
+mv *PZs* PZ
+mkdir RESP
+mv RESP.* RESP
+#rm rdseed*

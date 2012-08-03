@@ -1,0 +1,35 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH FPLOT 3F "%G%"
+.SH NAME
+fplot \- fast plotting routine
+.SH SYNOPSIS
+\fBcall fplot(n, x, y)\fP
+.TP 15
+\fBinteger\fP
+\fBn\fP
+.TP 15
+\fBreal*4\fP
+\fBx(1), y(1)\fP
+.SH DESCRIPTION
+The FORTRAN routine \fBfplot()\fP is a fast plotting routine. This routine was written to take advantage of extensions to the X server for fast vector plotting.
+.SH ARGUMENTS
+.TP 15
+\fBn\fP
+.SB (i)
+number of points to plot
+.TP 15
+\fBx\fP
+.SB (i)
+The plot data horizontal coordinate array
+.TP 15
+\fBy\fP
+.SB (i)
+The plot data vertical coordinate array
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

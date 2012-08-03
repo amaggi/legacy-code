@@ -1,0 +1,630 @@
+#
+LIB     =     -Bstatic -lpixrect -lm 
+OPTIONS	=	-g -L../src.vogle 
+DEST	= ../bin
+BNDCHK  =     -C
+F77     = g77
+GCC     = gcc
+SACDIR  = /software/apps/sac2000 
+
+all: convdp.lrlog10 estampsynt estlin2.lrlog10 \
+folov94 foray95 gktv.morelobes tv.cross12.lrlog10.phase\
+dgk12.morelobes choose_resp autowfm.lovray
+
+clean:
+	make clean1
+	make clean2
+
+clean1:
+	yes|rm erro?? dgk.0 *.[1-9] *.1[0-9]
+clean2:
+	yes|rm att.init disp.init dpa.init \
+	gk.init sour.init tf.init tv.init
+
+cleanlr:
+	make cleanlr1
+	make cleanlr2
+	make cleanps
+
+cleanlr1:
+	yes|rm error? *.it* des.so.? des.so.??
+
+cleanlr2:
+	yes|rm *.init*
+
+cleanps:
+	yes|rm *.postscript
+
+cleandgk:
+	yes|rm dgk.lov* dgk.ray*
+
+clean.o: 
+	\rm *.o
+
+cleanwfm:
+	yes|rm att.*.it? des.it? dgk.it? dgk.*.it? disp.*.it? tf.*.it? \
+	tv.it? *postscript error* gk.*.it? \
+        att.*.it?? des.it?? dgk.it?? dgk.*.it?? disp.*.it?? tf.*.it?? \
+        tv.it?? gk.*.it?? 
+
+cleaninit:
+	yes|rm *.init.* pick* tv.init
+
+nfdr92: nfdr92.f
+	$(F77) $(OPTIONS) nfdr92.f  ${SACDIR}/lib/sac.solaris.a -o $(DEST)/nfdr92
+
+etudedephasage: etudedephasage.f
+	$(F77) $(OPTIONS) etudedephasage.f -o $(DEST)/etudedephasage
+
+saito2002: saito2002.f
+	$(F77) $(OPTIONS) saito2002.f -o $(DEST)/saito2002
+
+saitoshQ: saitoshQ.f
+	$(F77) $(OPTIONS) saitoshQ.f -o $(DEST)/saitoshQ
+
+Interpol: Interpol.f
+	$(F77) $(OPTIONS) Interpol.f -o $(DEST)/Interpol
+
+Interaus: Interaus.f
+	$(F77) $(OPTIONS) Interaus.f -o $(DEST)/Interaus
+
+Intersimpl: Intersimpl.f
+	$(F77) $(OPTIONS) Intersimpl.f -o $(DEST)/Intersimpl
+
+Intersimplfor: Intersimplfor.f
+	$(F77) $(OPTIONS) Intersimplfor.f -o $(DEST)/Intersimplfor
+
+Intsurtrajet: Intsurtrajet.f
+	$(F77) $(OPTIONS) Intsurtrajet.f -o $(DEST)/Intsurtrajet
+
+Intsurtrajetaus: Intsurtrajetaus.f
+	$(F77) $(OPTIONS) Intsurtrajetaus.f -o $(DEST)/Intsurtrajetaus
+
+IntSYNTSMAC: IntSYNTSMAC.f
+	$(F77) $(OPTIONS) IntSYNTSMAC.f -o $(DEST)/IntSYNTSMAC
+
+IntSYNTPREM: IntSYNTPREM.f
+	$(F77) $(OPTIONS) IntSYNTPREM.f -o $(DEST)/IntSYNTPREM
+
+moho3SMAC: moho3SMAC.f
+	$(F77) $(OPTIONS) moho3SMAC.f -o $(DEST)/moho3SMAC
+
+MOHO3SMACtoGMT: MOHO3SMACtoGMT.f
+	$(F77) $(OPTIONS) MOHO3SMACtoGMT.f -o $(DEST)/MOHO3SMACtoGMT
+
+3SMACtoGMT: 3SMACtoGMT.f
+	$(F77) $(OPTIONS) 3SMACtoGMT.f -o $(DEST)/3SMACtoGMT
+
+readCNt7.e: readCNt7.e.f
+	$(F77) $(OPTIONS) readCNt7.e.f -o $(DEST)/readCNt7.e
+
+synt5.lr: synt5.lr.F suncore.ps.h initdes.ps.o \
+	suncore.ps.o
+	$(F77) $(OPTIONS)  synt5.lr.F initdes.ps.o suncore.ps.o \
+	coredum.o -o $(DEST)/synt5.lr $(LIB)
+
+estampsynt: estampsynt.f
+	$(F77) $(OPTIONS)  estampsynt.f -o $(DEST)/estampsynt
+
+convdp2.lr: convdp2.lr.f
+	$(F77) $(OPTIONS)  convdp2.lr.f -o $(DEST)/convdp2.lr
+
+convdp.lrlog10: convdp.lrlog10.f
+	$(F77) $(OPTIONS)  convdp.lrlog10.f -o $(DEST)/convdp.lrlog10
+
+estlin2.lrlog10:estlin2.lrlog10.o
+	$(F77) $(OPTIONS)  estlin2.lrlog10.o -o $(DEST)/estlin2.lrlog10
+
+estlin2.lrlog10.o:estlin2.lrlog10.f
+	$(F77) $(OPTIONS)  -c estlin2.lrlog10.f -o estlin2.lrlog10.o
+
+estlineric:estlineric.o
+	$(F77) $(OPTIONS)  estlineric.o -o $(DEST)/estlineric
+
+estlin2.lr:estlin2.lr.o
+	$(F77) $(OPTIONS)  estlin2.lr.o -o $(DEST)/estlin2.lr
+
+estlin2.lr.o:estlin2.lr.f
+	$(F77) $(OPTIONS)  -c estlin2.lr.f -o estlin2.lr.o
+
+foray95: foray95.f
+	$(F77) $(OPTIONS)  foray95.f -o $(DEST)/foray95
+
+folov94: folov94.f
+	$(F77) $(OPTIONS)  folov94.f -o $(DEST)/folov94
+
+tv.cross.lr.o: tv.cross.lr.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c tv.cross.lr.f -o tv.cross.lr.o
+
+lecdgk12.lr.phase.o: lecdgk12.lr.phase.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c lecdgk12.phase.lr.f -o lecdgk12.phase.lr.o
+
+lecdgk12.phase.lrlog10.o: lecdgk12.phase.lrlog10.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c lecdgk12.phase.lrlog10.f -o lecdgk12.phase.lrlog10.o
+
+lecdgk12.depha.lrlog10.o: lecdgk12.depha.lrlog10.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c lecdgk12.depha.lrlog10.f -o lecdgk12.depha.lrlog10.o
+
+tvinvma22b.o: tvinvma22b.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c tvinvma22b.f -o tvinvma22b.o 
+
+sordgk3.lrlog10.o: sordgk3.lrlog10.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c sordgk3.lrlog10.f -o sordgk3.lrlog10.o
+
+sordgk3.lr.o: sordgk3.lr.f
+	$(F77) $(OPTIONS) $(BNDCHK) -c sordgk3.lr.f -o sordgk3.lr.o
+
+ma22b.o: ma22b.f
+	$(F77) $(OPTIONS)  -c ma22b.f -o ma22b.o
+
+tv.cross12.lr.phase: tv.cross.lr.o \
+	lecdgk12.phase.lr.o tvinvma22b.o \
+	sordgk3.lr.o ma22b.o
+	$(F77) $(OPTIONS) $(BNDCHK) tv.cross.lr.o lecdgk12.phase.lr.o \
+	sordgk3.lr.o tvinvma22b.o ma22b.o \
+	-o $(DEST)/tv.cross12.lr.phase
+
+tv.cross12.lrlog10.phase: tv.cross.lr.o \
+	lecdgk12.phase.lrlog10.o tvinvma22b.o \
+	sordgk3.lrlog10.o ma22b.o
+	$(F77) $(OPTIONS) $(BNDCHK) tv.cross.lr.o lecdgk12.phase.lrlog10.o \
+	sordgk3.lrlog10.o tvinvma22b.o ma22b.o \
+	-o $(DEST)/tv.cross12.lrlog10.phase
+
+tv.cross12.lrlog10.depha: tv.cross.lr.o \
+	lecdgk12.depha.lrlog10.o tvinvma22b.o \
+	sordgk3.lrlog10.o ma22b.o
+	$(F77) $(OPTIONS) $(BNDCHK) tv.cross.lr.o lecdgk12.depha.lrlog10.o \
+	sordgk3.lrlog10.o tvinvma22b.o ma22b.o \
+	-o $(DEST)/tv.cross12.lrlog10.depha
+
+cross13.lr: cross13.lr.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross13.lr.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross13.lr $(LIB)
+	$(F77) $(OPTIONS)  cross13.lr.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross13.lr.nodess
+cross13.lr.o:cross13.lr.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross13.lr.F -o cross13.lr.o
+cross12.lr: cross12.lr.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.nodess
+cross12.lr.o:cross12.lr.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.F -o cross12.lr.o
+cross12.lr.a: cross12.lr.a.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.a.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.a $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.a.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.a.nodess
+cross12.lr.a.o:cross12.lr.a.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.a.F -o cross12.lr.a.o
+cross12.lr.anew: cross12.lr.anew.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.anew.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.anew $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.anew.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.anew.nodess
+cross12.lr.anew.o:cross12.lr.anew.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.anew.F -o cross12.lr.anew.o
+cross12.lr.amorelobes: cross12.lr.amorelobes.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.amorelobes.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.amorelobes $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.amorelobes.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.amorelobes.nodess
+cross12.lr.amorelobes.o:cross12.lr.amorelobes.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.amorelobes.F -o cross12.lr.amorelobes.o
+cross12.lr.amltest: cross12.lr.amltest.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.amltest.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.amltest $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.amltest.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.amltest.nodess
+cross12.lr.amltest.o:cross12.lr.amltest.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.amltest.F -o cross12.lr.amltest.o
+cross12.lr.auto: cross12.lr.auto.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.auto.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.auto $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.auto.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.auto.nodess
+cross12.lr.auto.o:cross12.lr.auto.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.auto.F -o cross12.lr.auto.o
+cross12.lr.auto.test: cross12.lr.auto.test.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.lr.auto.test.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12.lr.auto.test $(LIB)
+	$(F77) $(OPTIONS)  cross12.lr.auto.test.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.lr.auto.test.nodess
+cross12.lr.auto.test.o:cross12.lr.auto.test.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.lr.auto.test.F -o cross12.lr.auto.test.o
+cross12: cross12.o des.cross.o \
+	suncore.ps.o lcore.dummy.o
+	$(F77) $(OPTIONS)  cross12.o des.cross.o \
+	suncore.ps.o coredum.o -o $(DEST)/cross12 $(LIB)
+	$(F77) $(OPTIONS)  cross12.o initdes.ps.o \
+	suncore.ps.o lcore.dummy.o coredum.o \
+	-o $(DEST)/cross12.nodess
+cross12.o:cross12.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c cross12.F -o cross12.o
+des.cross.o: des.cross.F suncore.ps.h
+	$(F77) $(OPTIONS)  -c des.cross.F -o des.cross.o
+suncore.ps.o: suncore.ps.f
+	$(F77) $(OPTIONS)  -c suncore.ps.f -o suncore.ps.o
+lcore.dummy.o: lcore.dummy.f
+	$(F77) $(OPTIONS)  -c lcore.dummy.f -o lcore.dummy.o
+
+dgk12: dgk12.f
+	$(F77) $(OPTIONS) dgk12.f -o $(DEST)/dgk12
+dgk12.morelobes: dgk12.morelobes.f
+	$(F77) $(OPTIONS) dgk12.morelobes.f -o $(DEST)/dgk12.morelobes
+
+gktv: gktv.f
+	$(F77) $(OPTIONS) gktv.f -o $(DEST)/gktv
+gktv.morelobes: gktv.morelobes.f
+	$(F77) $(OPTIONS) gktv.morelobes.f -o $(DEST)/gktv.morelobes
+
+desresol.lr: desresol.lr.F suncore.ps.h initdes.ps.o \
+	suncore.ps.o
+	$(F77) $(OPTIONS)  desresol.lr.F initdes.ps.o suncore.ps.o \
+	coredum.o -o $(DEST)/desresol.lr $(LIB)
+
+dessin: dessin.F suncore.ps.h initdes.ps.o \
+	suncore.ps.o
+	$(F77) $(OPTIONS)  dessin.F initdes.ps.o suncore.ps.o \
+	coredum.o -o $(DEST)/dessin $(LIB)
+
+dessbar: dessbar.F suncore.ps.h initdes.ps.o \
+	suncore.ps.o
+	$(F77) $(OPTIONS)  dessbar.F initdes.ps.o suncore.ps.o \
+	coredum.o -o $(DEST)/dessbar $(LIB)
+
+caldistaz:caldistaz.o baz.o
+	$(F77) $(OPTIONS)  caldistaz.o baz.o -o $(DEST)/caldistaz 
+ 
+caldist: caldist.f
+	$(F77) $(OPTIONS)  caldist.f -o caldist
+ 
+caldistaz.o: caldistaz.f baz.o
+	$(F77) $(OPTIONS)  -c caldistaz.f -o caldistaz.o
+
+baz.o:baz.f
+	$(F77) $(OPTIONS)  -c baz.f -o baz.o
+
+caldistaz2: caldistaz2.f
+	$(F77) $(OPTIONS) caldistaz2.f -o $(DEST)/caldistaz2
+
+gc: gc.f
+	$(F77) $(OPTIONS) gc.f -o $(DEST)/gc
+
+nuvel1corr: nuvel1corr.f
+	$(F77) $(OPTIONS) nuvel1corr.f -o $(DEST)/nuvel1corr
+
+redvarqui: redvarqui.f
+	$(F77) $(OPTIONS) redvarqui.f -o $(DEST)/redvarqui
+
+desdepl: desdepl.o initdes.o gradue.o
+	$(F77) $(OPTIONS)  desdepl.o initdes.o \
+	gradue.o coredum.o -o $(DEST)/desdepl $(LIB)
+desdepl.o: desdepl.f
+	$(F77) $(OPTIONS)  -c desdepl.f -o desdepl.o
+
+gradue.o: gradue.f
+	$(F77) $(OPTIONS) -c gradue.f -o gradue.o
+
+initdes.o: initdes.f
+	$(F77) $(OPTIONS) -c initdes.f -o initdes.o
+
+3SMACcroute+sed+topotoGMT: 3SMACcroute+sed+topotoGMT.f
+	$(F77) $(OPTIONS) 3SMACcroute+sed+topotoGMT.f -o $(DEST)/3SMACcroute+sed+topotoGMT
+
+3SMACsedtoGMT: 3SMACsedtoGMT.f
+	$(F77) $(OPTIONS) 3SMACsedtoGMT.f -o $(DEST)/3SMACsedtoGMT
+
+ln2at: ln2at.f
+	$(F77) $(OPTIONS) ln2at.f -o $(DEST)/ln2at
+
+log102at: log102at.f
+	$(F77) $(OPTIONS) log102at.f -o $(DEST)/log102at
+
+log102ate: log102ate.f
+	$(F77) $(OPTIONS) log102ate.f -o $(DEST)/log102ate
+
+log102Q: log102Q.f
+	$(F77) $(OPTIONS) log102Q.f -o $(DEST)/log102Q
+
+log102at.tot: log102at.tot.f
+	$(F77) $(OPTIONS) log102at.tot.f -o $(DEST)/log102at.tot
+
+initsaito: initsaito.f
+	$(F77) $(OPTIONS) initsaito.f -o $(DEST)/initsaito
+
+initsaito2: initsaito2.f
+	$(F77) $(OPTIONS) initsaito2.f -o $(DEST)/initsaito2
+
+makindesdepl: makindesdepl.f
+	$(F77) $(OPTIONS) makindesdepl.f -o $(DEST)/makindesdepl
+
+makcoo.sta: makcoo.sta.f
+	$(F77) $(OPTIONS) makcoo.sta.f -o $(DEST)/makcoo.sta
+
+makcoo.xy: makcoo.xy.f
+	$(F77) $(OPTIONS) makcoo.xy.f -o $(DEST)/makcoo.xy
+
+makcoo.ep-sta: makcoo.ep-sta.f
+	$(F77) $(OPTIONS) makcoo.ep-sta.f -o $(DEST)/makcoo.ep-sta
+
+makvoro.xy: makvoro.xy.f
+	$(F77) $(OPTIONS) makvoro.xy.f -o $(DEST)/makvoro.xy
+
+select.events.geo: select.events.geo.f
+	$(F77) $(OPTIONS) select.events.geo.f -o $(DEST)/select.events.geo
+
+julien: julien.f
+	$(F77) $(OPTIONS) julien.f -o $(DEST)/julien
+
+julien2dmy: julien2dmy.f
+	$(F77) $(OPTIONS) julien2dmy.f -o $(DEST)/julien2dmy
+
+sortdatavgz2.sac.eric: sortdatavgz2.sac.eric.f
+	$(F77) $(OPTIONS) sortdatavgz2.sac.f ${SACDIR}/lib/libsac.a -o $(DEST)/sortdatavgz2.sac
+
+sortdatavgz2.sac: sortdatavgz2.sac.f
+	$(F77) sortdatavgz2.sac.f -L/usr/local/sac/lib/ -L/usr/X11R6/lib/ -lsac -lX11 -o $(DEST)/sortdatavgz2.sac
+
+sortdata1bis: sortdata1bis.f
+	$(F77) $(OPTIONS) sortdata1bis.f ${SACDIR}/libsac.a.solaris -o $(DEST)/sortdata1bis
+
+sortdata1bisLP: sortdata1bisLP.f
+	$(F77) $(OPTIONS) sortdata1bisLP.f ${SACDIR}/lib/sacold.a -o $(DEST)/sortdata1bisLP
+
+chheadz1.sac: chheadz1.sac.f
+	$(F77) chheadz1.sac.f -L/usr/local/sac/lib/ -L/usr/X11R6/lib/ -lsac -lX11 -o $(DEST)/chheadz1.sac
+
+sac.wfm: sac.wfm.o daymo.o lpyr.o
+	$(F77) $(OPTIONS) sac.wfm.o daymo.o lpyr.o ${SACDIR}/lib/sacold.a -o $(DEST)/sac.wfm
+
+sac.wfm.o: sac.wfm.f daymo.o
+	$(F77) $(OPTIONS)  -c sac.wfm.f -o sac.wfm.o
+
+autosac2wfm.eric: autosac2wfm.o daymo.o lpyr.o
+	$(F77) $(OPTIONS) autosac2wfm.o daymo.o lpyr.o ${SACDIR}/lib/sac.a -o $(DEST)/autosac2wfm
+
+autosac2wfm: autosac2wfm.o daymo.o lpyr.o
+	$(F77) $(OPTIONS) autosac2wfm.o daymo.o lpyr.o -L/usr/local/sac/lib/ -L/usr/X11R6/lib/ -lsac -lX11 -o $(DEST)/autosac2wfm
+
+autosac2wfm.o: autosac2wfm.anne.f daymo.o
+	$(F77) $(OPTIONS)  -c autosac2wfm.anne.f -o autosac2wfm.o
+
+autowfm2sac.eric: autowfm2sac.o daymo.o 
+	$(F77) $(OPTIONS) autowfm2sac.o daymo.o ${SACDIR}/lib/sac.a -o $(DEST)/autowfm2sac
+
+autowfm2sac.o: autowfm2sac.f daymo.o
+	$(F77) $(OPTIONS)  -c autowfm2sac.f -o autowfm2sac.o
+
+autowfm2sac: autowfm2sac.o daymo.o 
+	$(F77) $(OPTIONS) autowfm2sac.o daymo.o -L/usr/local/sac/lib/ -L/usr/X11R6/lib/ -lsac -lX11 -o $(DEST)/autowfm2sac
+
+sachole2sac: sachole2sac.o daymo.o lpyr.o 
+	$(F77) $(OPTIONS) sachole2sac.o daymo.o lpyr.o ${SACDIR}/lib/sacold.a -o $(DEST)/sachole2sac
+
+sachole2sac.o: sachole2sac.f 
+	$(F77) $(OPTIONS)  -c sachole2sac.f -o sachole2sac.o
+
+daymo.o:daymo.f
+	$(F77) $(OPTIONS)  -c daymo.f -o daymo.o
+
+lpyr.o: lpyr.f
+	$(F77) $(OPTIONS)  -c lpyr.f -o lpyr.o
+
+wfm.sac: wfm.sac.f
+	$(F77) $(OPTIONS) wfm.sac.f ${SACDIR}/lib/sacold.a -o $(DEST)/wfm.sac
+
+CMT-ALLtoCMT-SELECTED: CMT-ALLtoCMT-SELECTED.f
+	$(F77) $(OPTIONS) CMT-ALLtoCMT-SELECTED.f -o $(DEST)/CMT-ALLtoCMT-SELECTED
+
+creatresp: creatresp.f
+	$(F77) $(OPTIONS) creatresp.f -o $(DEST)/creatresp
+
+faitdec: faitdec.f
+	$(F77) $(OPTIONS) faitdec.f -o $(DEST)/faitdec
+
+faitdecz.40-1: faitdecz.40-1.f
+	$(F77) $(OPTIONS) faitdecz.40-1.f -o $(DEST)/faitdecz.40-1
+
+faitdecz.20-1: faitdecz.20-1.f
+	$(F77) $(OPTIONS) faitdecz.20-1.f -o $(DEST)/faitdecz.20-1
+
+melangecroutage: melangecroutage.o
+	$(F77) $(OPTIONS)  melangecroutage.o -o $(DEST)/melangecroutage
+
+melangecroutage.o: melangecroutage.f
+	$(F77) $(OPTIONS)  -c melangecroutage.f melangecroutage.o
+
+purpathsSMAC.OC-CONT: purpathsSMAC.OC-CONT.f
+	$(F77) $(OPTIONS) $(BNDCHK)  purpathsSMAC.OC-CONT.f -o $(DEST)/purpathsSMAC.OC-CONT
+
+purpathsSMAC-MOHO: purpathsSMAC-MOHO.f
+	$(F77) $(OPTIONS) $(BNDCHK)  purpathsSMAC-MOHO.f -o $(DEST)/purpathsSMAC-MOHO
+
+purpathsSMAC-MOHO-AGE: purpathsSMAC-MOHO-AGE.f
+	$(F77) $(OPTIONS) $(BNDCHK)  purpathsSMAC-MOHO-AGE.f -o $(DEST)/purpathsSMAC-MOHO-AGE
+
+surdet: surdet.f
+	$(F77) $(OPTIONS) $(BNDCHK) surdet.f -o $(DEST)/surdet
+
+surdetlentG: surdetlentG.f
+	$(F77) $(OPTIONS) $(BNDCHK) surdetlentG.f -o $(DEST)/surdetlentG
+
+readdes: readdes.f
+	$(F77) $(OPTIONS) $(BNDCHK) readdes.f -o $(DEST)/readdes
+
+regioericT: regioericT.f
+	$(F77) $(OPTIONS) $(BNDCHK) regioericT.f -o $(DEST)/regioericT
+
+regioericdQ: regioericdQ.f
+	$(F77) $(OPTIONS) $(BNDCHK) regioericdQ.f -o $(DEST)/regioericdQ
+
+regioericQ: regioericQ.f
+	$(F77) $(OPTIONS) $(BNDCHK) -r8 regioericQ.f -o $(DEST)/regioericQ
+
+regioaus: regioaus.f
+	$(F77) $(OPTIONS) $(BNDCHK) regioaus.f -o $(DEST)/regioaus
+
+regioxi: regioxi.f
+	$(F77) $(OPTIONS) $(BNDCHK) -r8 regioxi.f -o $(DEST)/regioxi
+
+regioausresol: regioausresol.f
+	$(F77) $(OPTIONS) $(BNDCHK) -r8 regioausresol.f -o $(DEST)/regioausresol
+
+regioausresol2: regioausresol2.f
+	$(F77) $(OPTIONS) $(BNDCHK) -r8 regioausresol2.f -o $(DEST)/regioausresol2
+
+regioausresol3: regioausresol3.f
+	$(F77) $(OPTIONS) $(BNDCHK) -r8 regioausresol3.f -o $(DEST)/regioausresol3
+
+pourcenT.VS.anis: pourcenT.VS.anis.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.VS.anis.f -o $(DEST)/pourcenT.VS.anis
+
+pourcenT.VS.aus: pourcenT.VS.aus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.VS.aus.f -o $(DEST)/pourcenT.VS.aus
+
+pourcenT.xyz: pourcenT.xyz.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.xyz.f -o $(DEST)/pourcenT.xyz
+
+pourcenT.VSH.aus: pourcenT.VSH.aus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.VSH.aus.f -o $(DEST)/pourcenT.VSH.aus
+
+pourcenT.VSiso.aus: pourcenT.VSiso.aus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.VSiso.aus.f -o $(DEST)/pourcenT.VSiso.aus
+
+pourcenT.XI.aus: pourcenT.XI.aus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.XI.aus.f -o $(DEST)/pourcenT.XI.aus
+
+pourcenT.vs2Xi.aus: pourcenT.vs2Xi.aus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcenT.vs2Xi.aus.f -o $(DEST)/pourcenT.vs2Xi.aus
+
+pourcentsynt: pourcentsynt.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcentsynt.f -o $(DEST)/pourcentsynt
+
+pourbid: pourbid.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourbid.f -o $(DEST)/pourbid
+
+pourcentQ: pourcentQ.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcentQ.f -o $(DEST)/pourcentQ
+
+pourcentQaus: pourcentQaus.f
+	$(F77) $(OPTIONS) $(BNDCHK) pourcentQaus.f -o $(DEST)/pourcentQaus
+
+dat2nomcoo: dat2nomcoo.f
+	$(F77) $(OPTIONS) $(BNDCHK) dat2nomcoo.f -o $(DEST)/dat2nomcoo
+
+rayrad94e: rayrad94e.f
+	$(F77) $(OPTIONS) rayrad94e.f  -o $(DEST)/rayrad94e
+
+lovrad94e2: lovrad94e2.f
+	$(F77) $(OPTIONS) lovrad94e2.f  -o $(DEST)/lovrad94e2
+
+faitrequete.anne: faitrequete.anne.f
+	$(F77) $(OPTIONS) faitrequete.anne.f  -o $(DEST)/faitrequete
+
+faitrequetecvtit: faitrequetecvtit.f
+	$(F77) $(OPTIONS) faitrequetecvtit.f  -o $(DEST)/faitrequetecvtit
+
+faitrequetepol: faitrequetepol.f
+	$(F77) $(OPTIONS) faitrequetepol.f  -o $(DEST)/faitrequetepol
+
+cvtit2jul: cvtit2jul.f
+	$(F77) $(OPTIONS) cvtit2jul.f  -o $(DEST)/cvtit2jul
+
+faitrequetePAS: faitrequetePAS.f
+	$(F77) $(OPTIONS) faitrequetePAS.f  -o $(DEST)/faitrequetePAS
+
+des2intomo: des2intomo.f
+	$(F77) $(OPTIONS) des2intomo.f  -o $(DEST)/des2intomo
+
+des2intomoban: des2intomoban.f
+	$(F77) $(OPTIONS) des2intomoban.f  -o $(DEST)/des2intomoban
+
+des2intomosynt: des2intomosynt.f
+	$(F77) $(OPTIONS) des2intomosynt.f  -o $(DEST)/des2intomosynt
+
+readdesaus_vshvsv: readdesaus_vshvsv.f
+	$(F77) $(OPTIONS) readdesaus_vshvsv.f  -o $(DEST)/readdesaus_vshvsv
+
+GEOGRAPHICtritoCMT-SELECTED: GEOGRAPHICtritoCMT-SELECTED.f
+	$(F77) $(OPTIONS) GEOGRAPHICtritoCMT-SELECTED.f  -o $(DEST)/GEOGRAPHICtritoCMT-SELECTED
+
+GEOGRAPHICtritoxy: GEOGRAPHICtritoxy.f
+	$(F77) $(OPTIONS) GEOGRAPHICtritoxy.f  -o $(DEST)/GEOGRAPHICtritoxy
+
+comptharmo: comptharmo.f
+	$(F77) $(OPTIONS) comptharmo.f  -o $(DEST)/comptharmo
+
+mixvserror: mixvserror.f
+	$(F77) $(OPTIONS) mixvserror.f  -o $(DEST)/mixvserror
+
+diffvsisoanis: diffvsisoanis.f
+	$(F77) $(OPTIONS) diffvsisoanis.f  -o $(DEST)/diffvsisoanis
+
+tftotime: tftotime.f
+	$(F77) $(OPTIONS) tftotime.f  -o $(DEST)/tftotime
+
+trilp: trilp.f
+	$(F77) $(OPTIONS) trilp.f  -o $(DEST)/trilp
+
+convert_hz_rad: convert_hz_rad.f
+	$(F77) $(OPTIONS) convert_hz_rad.f  -o $(DEST)/convert_hz_rad
+
+inv_julian: inv_julian.f
+	$(F77) $(OPTIONS) inv_julian.f  -o $(DEST)/inv_julian
+
+pourcenT.logic: pourcenT.logic.f
+	$(F77) $(OPTIONS) pourcenT.logic.f  -o $(DEST)/pourcenT.logic
+
+pourcenT.coupgc: pourcenT.coupgc.f
+	$(F77) $(OPTIONS) pourcenT.coupgc.f  -o $(DEST)/pourcenT.coupgc
+
+GtoSKS: GtoSKS.f
+	$(F77) $(OPTIONS) GtoSKS.f  -o $(DEST)/GtoSKS
+
+trilocaintomodesVS: trilocaintomodesVS.f
+	$(F77) $(OPTIONS) trilocaintomodesVS.f  -o $(DEST)/trilocaintomodesVS
+
+estlinsigexact.lr: estlinsigexact.lr.f
+	$(F77) $(OPTIONS) estlinsigexact.lr.f  -o $(DEST)/estlinsigexact.lr
+
+faitresol: faitresol.f
+	$(F77) $(OPTIONS) faitresol.f  -o $(DEST)/faitresol
+
+triintomodesVS: triintomodesVS.f
+	$(F77) $(OPTIONS) triintomodesVS.f  -o $(DEST)/triintomodesVS
+
+tri2intomodesVS: tri2intomodesVS.f
+	$(F77) $(OPTIONS) tri2intomodesVS.f  -o $(DEST)/tri2intomodesVS
+
+splitintomodesVs: splitintomodesVs.f
+	$(F77) $(OPTIONS) splitintomodesVs.f  -o $(DEST)/splitintomodesVs
+
+estampsynt: estampsynt.f
+	$(F77) $(OPTIONS) estampsynt.f -o $(DEST)/estampsynt
+
+choose_resp: choose_resp.f
+	$(F77) $(OPTIONS) choose_resp.f -o $(DEST)/choose_resp
+
+autowfm.lovray: autowfm.lovray.sylvana.linux.c
+	$(GCC) autowfm.lovray.sylvana.linux.c -o $(DEST)/autowfm.lovray -lm
+
+

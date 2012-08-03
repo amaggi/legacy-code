@@ -1,0 +1,44 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH PLOT1 3F "%G%"
+.SH NAME
+plot1 \- plot a curve
+.SH SYNOPSIS
+\fBcall plot1(n, x, y, roff, iclip)\fP
+.TP 15
+\fBinteger\fP
+\fBn, iclip\fP
+.TP 15
+\fBreal\fP
+\fBx(n), y(n), roff\fP
+.SH DESCRIPTION
+The FORTRAN routine \fBplot1()\fP will cause one single curve to be plotted as a solid line.
+.SH ARGUMENTS
+.TP 15
+\fBx\fP
+.SB (i)
+Plot data horizontal coordinate array
+.TP 15
+\fBy\fP
+.SB (i)
+Plot data vertical coordinate array
+.TP 15
+\fBroff\fP
+.SB (i)
+The offset in standard raster units from the true curve for this particular curve (used to thicken lines).
+.SB (i)
+.TP 15
+\fBiclip\fP
+.SB (i)
+A flag used to turn on or off the soft clipping defined by the physical plot dimension.
+.nf
+0 - clip
+1 - do not clip
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

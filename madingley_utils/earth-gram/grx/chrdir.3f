@@ -1,0 +1,23 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CHRDIR 3F "%G%"
+.SH NAME
+chrdir \- change text labelling direction
+.SH SYNOPSIS
+.HP 15
+\fBcall chrdir(angle)\fP
+.IP \fBreal\fP 15
+\fBangle\fP
+.SH DESCRIPTION
+Subroutine \fBchrdir()\fP will set the direction or orientation of text labelling.
+.SH ARGUMENTS
+.IP \fBangle\fP 15
+.SB (i)
+The angle in degrees measured positive counter-clockwise from a horizontal line which defines the orientation of a line of text labelling.
+.SH "SEE ALSO"
+\fBniceplot(3f), chrsiz(3f)\fP
+.SH AUTHOR
+Danny Harvey

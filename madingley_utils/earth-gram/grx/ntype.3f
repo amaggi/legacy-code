@@ -1,0 +1,36 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH NTYPE 3F "%G%"
+.SH NAME
+ntype \- define plot scales
+.SH SYNOPSIS
+\fBcall ntype(xtype, ytype)\fP
+.TP 15
+\fBcharacter*3\fP
+\fBxtype, ytype\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBntype()\fP defines the type of plot scales (linear or log).
+.SH ARGUMENTS
+.TP 15
+\fBxtype\fP
+.SB (i)
+A string which defines whether the horizontal axis is linear or logarithmic.
+.nf
+LIN - linear
+LOG - logarithmic
+.fi
+.TP 15
+\fBytype\fP
+.SB (i)
+A string which defines whether the vertical axis is linear or logarithmic.
+.nf
+LIN - linear
+LOG - logarithmic
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

@@ -1,0 +1,24 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SETFG 3F "%G%"
+.SH NAME
+setfg \- set foreground color
+.SH SYNOPSIS
+\fBcall setfg(color)\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBcolor\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBsetfg()\fP will set the foreground color for subsequent plotting.
+.SH ARGUMENTS
+.TP 15
+\fBcolor\fP
+.SB (i)
+The name of the color of the foreground.  This name follows the naming convention of X11, e.g. "black", "white", "lightBlue", "#2fa".
+.SH "SEE ALSO"
+\fBniceplot(3f), setbac(3f)\fP
+.SH AUTHOR
+Ben Kohl

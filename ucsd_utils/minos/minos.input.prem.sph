@@ -1,0 +1,6 @@
+aniprem.model
+sph_aniprem_30mhz
+sph_aniprem_30mhz.bin
+1.E-9 125.
+3
+0 2000 1.e-3 30. 1000

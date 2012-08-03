@@ -1,0 +1,1 @@
+ifort -g -warn errors regiostack6_ompV3d_alessia.f -o xregiostack6

@@ -1,0 +1,67 @@
+                            *HDF FILE FORMAT
+
+Program write statement:
+
+      write(4,1024) ahyp,isol,iseq,yr,mon,day,hr(1),min(1),sec(1),
+     1 ad,glat,glon,depth,dmag,imag,ntel,iscdep,greg,ndep,
+     2 se,ser,sedep,openaz,maz1,maz2,maz3,maz4
+ 1024 format(a1,a3,a2,i2,2i3,1x,2i3,f6.2,a1,2f8.3,f6.1,f4.1,i2,
+     1 i3,f5.1,2i3,4f8.2,4i4)
+
+Variable definitions:
+
+ahyp         open azimuth of teleseismic             a1
+             stations (delta > 30 deg) used
+
+             blank = <  180 deg
+             Z     = >= 180 deg
+
+                    or
+
+             A     = <  180 deg
+             B     = <  210 deg and  > 180 deg
+             C     = <  240 deg and  > 210 deg
+             D     = <  270 deg and  > 240 deg
+             F     = >  270 deg
+
+isol         solution type                           a3
+
+             DEQ = depth free
+             LEQ = depth fixed by program
+             FEQ = depth fixed by Engdahl
+             XEQ = poor solution
+
+iseq         other info                              a2
+
+             X = explosion/cavity collapse
+             M = focal mechanism available
+
+yr           year                                    i2
+mon          month                                   i2
+day          day                                     i2
+hr           origin hour                             i2
+min          origin minute                           i2
+sec          origin second                           f5.2
+ad           source agency                           a1
+glat         geographic latitude                     f7.3
+glon         geographic longitude                    f8.3
+depth        depth (km)                              f6.1
+dmag         mb magnitude                            f4.1
+imag         Mw magnitude                            f2.1
+             (Ms magnitude if Mw not available)
+             (Mw magnitude if iseq equals M)
+ntel         number of teleseismic observations      i3
+             (delta > 30 deg) used                   
+iscdep       ISC depth (km)                          f5.1
+greg         Flinn-Engdahl region number             i3
+ndep         number of depth phase observations      i3
+             (delta > 30 deg) used                   
+se           standard error of observations used     f4.2
+ser          standard error in position (km)         f5.2
+sedep        standard error in depth (km)            f5.2
+openaz       largest station open azimuth            f6.2
+az1          semi-axis azimuth                       f4.0
+len1         semi-axis length                        f4.1
+az2          semi-axis azimuth                       f4.0
+len2         semi-axis length                        f4.1
+

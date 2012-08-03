@@ -1,0 +1,52 @@
+The minos code is in the file "minos.code" with some 
+comments indicating what the input and output is.
+See notes at top of program for I/O
+
+As far as the input is concerned -- you should always have wmin
+greater than about 0.2 -- the mode counter gets confused with
+the slichter mode, 1S1.
+
+Sometimes the mode counter fails for spheroidal modes -- changing
+eps or the frequency limits for that l usually cures it -- the output
+should be ok up to the l before it got confused.
+
+There are a bunch of models in the file "minos.models" with
+the apropriate formats (note that the title line is part
+of each model file). 
+
+mnosa.f is a variant of minos and has similar input
+except that is reads a file of modes (e.g., the file
+"rmodes" is an example for radial modes) -- this is
+useful if you only want to compute a subset of specific
+modes (e.g. observed modes!). The first line in the
+file is jcom (defined as before) followed by a line for each
+model:
+
+n l omest omerr
+
+where omest is an estimate of the frequency (in mHz) and
+omerr is an uncertainty which is used initially to define
+a region in which to find the mode. omerr is given in
+microHz. If omerr is too small, the region is expanded
+until the mode is found
+
+
+minos_bran is another variant which works like minos but
+replaces the input line:
+
+lmin,lmax, wmin,wmax,nbran
+
+with lmin,lmax,wmin,wmax,nmin,nmax
+
+where nmin and nmax are the min and max radial order numbers
+-- modes are computed branch-wise ie 0Sl then 1Sl etc.
+
+This version is more flexible since it doesn't have to
+store a table for all modes at a given l so you don't have
+to worry about dimension statements in subroutine wtable
+
+
+Guy Masters
+
+
+

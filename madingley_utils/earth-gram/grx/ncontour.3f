@@ -1,0 +1,75 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH NCONTOUR 3F "%G%"
+.SH NAME
+ncontour \- render a contour map
+.SH SYNOPSIS
+.HP 15
+\fBcall ncontour (nx, nxmax, ny, x, y, z, ctype, zmin, zmax, dz)\fB
+.TP 15
+\fBinteger\fP
+\fBnx, nxmax, ny\fP
+.TP 15
+\fBreal*4\fP
+\fBx(nx), y(ny), z(nxmax, ny), zmin, zmax, dz\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBctype\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBncontour()\fP will render line and/or color contours for displaying z = z(x,y) in "map" view.  Limits and scales for the x-y axes must be previously established with calls to setdim, setscl, or axis.  z(x,y) must be specified as a regular rectangular grid of points.
+.SH ARGUMENTS
+.TP 15
+\fBnx\fP
+.SB (i)
+The number of x-coordinates in the grid
+.TP 15
+\fBny\fP
+.SB (i)
+The number of y-coordinates in the grid
+.TP 15
+\fBx(nx)\fP
+.SB (i)
+The x-coordinates, repeated values are not allowed and the points must either increase or decrease monotonically
+.TP 15
+\fBy(ny)\fP
+.SB (i)
+The y-coordinates, repeated values are not allowed and the points must either increase or decrease monotonically
+.TP 15
+\fBy(ny)\fP
+.SB (i)
+The y-coordinates, repeated values are not allowed and the points must either increase or decrease monotonically
+.TP 15
+\fBz(nxmax,ny)\fP
+.SB (i)
+The z(x,y) values for each x-y grid point, given in x order first
+.TP 15
+\fBctype\fP
+.SB (i)
+Contour type
+.nf
+lines  - make line contours only
+colors - make color contours only
+both   - make line contours on top of color contours
+.fi
+.TP 15
+\fBzmin\fP
+.SB (i)
+The minimum z-value for contour clipping
+.TP 15
+\fBzmax\fP
+.SB (i)
+The maximum z-value for contour clipping.  If zmax = zmin, then no clipping will take place and internal values of zmin and zmax will be computed automatically from the range of the data
+.TP 15
+\fBdz\fP
+.SB (i)
+The z contour line increment.  If dz <= 0.0, then a "nice" increment will be chosen.
+.SB (o)
+Chosen "nice" increment in input dz <= 0.0
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f), setdim(3f), setscl(3f), axis(3f)\fP
+.SH AUTHOR
+Danny Harvey

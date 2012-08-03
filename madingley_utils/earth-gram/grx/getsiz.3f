@@ -1,0 +1,35 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH GETSIZ 3F "%G%"
+.SH NAME
+getsiz \- compute the size of a character
+.SH SYNOPSIS
+\fBcall getsiz(c, ihite, iwidth)\fP
+.TP 15
+\fBcharacter*1\fP
+\fBc\fP
+.TP 15
+\fBreal\fP
+\fBihite, iwidth\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBgetsiz()\fP will return the height and width for a particular character of a particular font.  Subroutine \fBcfont()\fP must be called prior to a call to this subroutine in order to specify the font.  An error exit will occur if this is not the case.
+.SH ARGUMENTS
+.TP 15
+\fBc\fP
+.SB (i)
+The character to be computed.
+.TP 15
+\fBihite\fP
+.SB (o)
+The hieght of the selected character.
+.TP 15
+\fBiwidth\fP
+.SB (o)
+The width of the selected character.
+.SH "SEE ALSO"
+\fBniceplot(3f), cfont(3f)\fP
+.SH AUTHOR
+Danny Harvey

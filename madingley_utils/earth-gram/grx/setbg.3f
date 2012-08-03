@@ -1,0 +1,24 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SETBG 3F "%G%"
+.SH NAME
+setbg \- set backround color
+.SH SYNOPSIS
+\fBcall setbg(color)\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBcolor\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBsetbg()\fP will set the background color for subsequent plotting.
+.SH ARGUMENTS
+.TP 15
+\fBcolor\fP
+.SB (i)
+The name of the color of the background.  This name follows the naming convention of X11, e.g. "black", "white", "lightBlue", "#2fa".
+.SH "SEE ALSO"
+\fBniceplot(3f), setbac(3f)\fP
+.SH AUTHOR
+Ben Kohl

@@ -1,0 +1,16 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH FINITT 3F "%G%"
+.SH NAME
+finitt \- finish plotting
+.SH SYNOPSIS
+\fBcall finitt()\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBfinitt()\fP should be called when plotting is finished.
+.SH "SEE ALSO"
+\fBniceplot(3f), initt(3f)\fP
+.SH AUTHOR
+Danny Harvey

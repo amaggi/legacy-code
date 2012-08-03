@@ -1,0 +1,36 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SETDIM 3F "%G%"
+.SH NAME
+setdim \- set plotting area dimensions
+.SH SYNOPSIS
+\fBcall setdim(xdim, ydim, xlow, ylow)\fP
+.TP 15
+\fBreal\fP
+\fBxdim, ydim, xlow, ylow\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBsetdim()\fP sets the physical dimensions of the plot and must be called prior to a call to setscl.
+.SH ARGUMENTS
+.TP 15
+\fBxdim\fP
+.SB (i)
+Horizontal dimension in inches
+.TP 15
+\fBydim\fP
+.SB (i)
+Vertical dimension in inche
+.TP 15
+\fBxlow\fP
+.SB (i)
+Horizontal location of lower left hand corner of plot in inches
+.TP 15
+\fBylow\fP
+.SB (i)
+Vertical location of lower left hand corner of plot in inches
+.SH "SEE ALSO"
+\fBniceplot(3f), setscl(3f)\fP
+.SH AUTHOR
+Danny Harvey

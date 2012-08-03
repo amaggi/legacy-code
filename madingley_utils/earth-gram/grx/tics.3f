@@ -1,0 +1,69 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH TICS 3F "%G%"
+.SH NAME
+tics \- plot tic marks
+.SH SYNOPSIS
+.HP 15
+\fBcall tics(x1, y1, x2, y2, stic, ntic, dtic, tlen, thick, idir)\fP
+.TP 15
+\fBreal\fP
+\fBx1, y1, x2, y2, stic, ntic, dtic, tlen, thick\fP
+.TP 15
+\fBinteger\fP
+\fBidir\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBtics()\fP draws tic marks in the niceplot window.
+.SH ARGUMENTS
+.TP 15
+\fBx1\fP
+.SB (i)
+X coordinate of starting point of axis in user units
+.TP 15
+\fBy1\fP
+.SB (i)
+Y coordinate of starting point of axis in user units
+.TP 15
+\fBx2\fP
+.SB (i)
+X coordinate of ending point af axis in user units
+.TP 15
+\fBy2\fP
+.SB (i)
+Y coordinate of ending point af axis in user units
+.TP 15
+\fBstic\fP
+.SB (i)
+The position along axis from (x1,y1) for first tic mark in user units
+.TP 15
+\fBntic\fP
+.SB (i)
+The number of tic marks
+.TP 15
+\fBdtic\fP
+.SB (i)
+Increment along axis for tic marks in user units
+.TP 15
+\fBtlen\fP
+.SB (i)
+Length of tic marks in inches
+.TP 15
+\fBthick\fP
+.SB (i)
+Thickness of tic marks in inches
+.TP 15
+\fBidir\fP
+.SB (i)
+Flag which defines orientation of tic marks (directions given for (x2,y2) directly to the right of (x1,y1))
+.nf
+> 0 - tic marks point up
+= 0 - tic marks point on both sides
+< 0 - tic marks point down
+.fi
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

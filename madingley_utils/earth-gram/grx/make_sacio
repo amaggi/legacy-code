@@ -1,0 +1,41 @@
+#
+# Makefile
+#
+# $Id: make_sacio,v 1.1.1.1 2002/07/12 11:15:18 maggi Exp $
+#
+# $Log: make_sacio,v $
+# Revision 1.1.1.1  2002/07/12 11:15:18  maggi
+#
+#
+# Revision 1.1  2000/05/17 12:32:02  maggi
+# Initial revision
+#
+#
+OPT=-g
+CC=gcc
+CFLAGS = $(OPT)
+
+LIBDIR=/home/maggi/lib
+LIBSRC=sacio.c
+LIB=libsac.a
+
+LIBOBJ = ${LIBSRC:%.c=$(LIB)(%.o)}
+INSTALL = install
+RANLIB = ranlib
+
+default: $(LIB)
+
+SUFFIXES = .c .o
+.SUFFIXES: $(SUFFIXES)
+
+.c.o:
+	$(CC) ${CFLAGS} -c -o $@ $<
+
+${LIB}:${LIBOBJ} sacio.h
+
+install:
+	${INSTALL} -c -m 0644 $(LIB) $(LIBDIR)
+	${RANLIB} ${LIBDIR}/$(LIB)
+
+clean: 
+	rm $(LIB)

@@ -1,0 +1,36 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH SETSCL 3F "%G%"
+.SH NAME
+setscl \- set plotting area scaling
+.SH SYNOPSIS
+\fBcall setscl(xmin, xmax, ymin, ymax)\fP
+.TP 15
+\fBreal\fP
+\fBxmin, xmax, ymin, ymax\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBsetscl()\fP sets the scale factors for the plot.  It must be called after the call to \fBsetdim(3f)\fP.
+.SH ARGUMENTS
+.TP 15
+\fBxmin\fP
+.SB (i)
+The value of plot data corresponding to the left hand edge of the plot.
+.TP 15
+\fBxmax\fP
+.SB (i)
+The value of plot data corresponding to the right hand edge of the plot.
+.TP 15
+\fBymin\fP
+.SB (i)
+The value of plot data corresponding to the bottom edge of the plot.
+.TP 15
+\fBymax\fP
+.SB (i)
+The value of plot data corresponding to the top edge of the plot.
+.SH "SEE ALSO"
+\fBniceplot(3f), setdim(3f)\fP
+.SH AUTHOR
+Danny Harvey

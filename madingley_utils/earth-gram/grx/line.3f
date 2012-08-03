@@ -1,0 +1,43 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH LINE 3F "%G%"
+.SH NAME
+line \- draw a line
+.SH SYNOPSIS
+\fBcall line(x1, y1, x2, y2, thick, ithick, iclip)\fP
+.TP 15
+\fBreal\fP
+\fBx1, y1, x2, y2, thick\fP
+.TP 15
+\fBinteger\fP
+\fBithick, iclip\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBline()\fP draws a line in the niceplot window.
+.SH ARGUMENTS
+.TP 15
+\fBx1,y1\fP
+.SB (i)
+First endpoint
+.TP 15
+\fBx2,y2\fP
+.SB (i)
+Second endpoint
+.TP 15
+\fBthick\fP
+.SB (i)
+Thickness of line in inches
+.TP 15
+\fBithick\fP
+.SB (i)
+Thickness flag
+.TP 15
+\fBiclip\fP
+.SB (i)
+Clip flag (\fBsee plot1(3f)\fP)
+.SH "SEE ALSO"
+\fBniceplot(3f), plot1(3f)\fP
+.SH AUTHOR
+Danny Harvey

@@ -1,0 +1,1 @@
+/usr/bin/g77 -m32   -L/emul/ia32-linux/lib/ld-2.3.6.so -L/emul/ia32-linux/lib -L/emul/ia32-linux/usr/lib /usr/lib/gcc/x86_64-linux-gnu/4.1.2/32/libgcc_s.so  -Wl,-L/emul/ia32-linux/lib -Wl,-L/emul/ia32-linux/usr/lib -o distaz asktxt.f caldat.f calendar.f call_distaz.f char_count.f distaz.f julday.f julian.f openf.f remove.f yesno.f 

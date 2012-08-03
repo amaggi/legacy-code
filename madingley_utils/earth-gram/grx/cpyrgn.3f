@@ -1,0 +1,36 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CPYRGN 3F "%G%"
+.SH NAME
+cpyrgn \- copy a region
+.SH SYNOPSIS
+\fBcall cpyrgn(xmn, xmx, ymn, ymx)\fP
+.TP 15
+\fBreal\fP
+\fBxmn, xmx, ymn, ymx\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBcpyrgn()\fP will copy a rectangular region from the pixmap to the window.  This is usually used in conjunction with plot batching.
+.SH ARGUMENTS
+.TP 15
+\fBxmn\fP
+.SB (i)
+Horizontal location of left edge of region in user units.
+.TP 15
+\fBxmx\fP
+.SB (i)
+Horizontal location of right edge of region in user units.
+.TP 15
+\fBymn\fP
+.SB (i)
+Vertical location of bottom edge of region in user units.
+.TP 15
+\fBymx\fP
+.SB (i)
+Vertical location of top edge of region in user units.
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

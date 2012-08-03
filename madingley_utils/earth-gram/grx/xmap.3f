@@ -1,0 +1,24 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH XMAP 3F "%G%"
+.SH NAME
+xmap \- covert from plotting to raster units
+.SH SYNOPSIS
+\fBxmap(x)\fP
+.TP 15
+\fBreal\fP 
+\fBx\fP
+.SH DESCRIPTION
+The FORTRAN function \fBxmap()\fP maps from horizontal plot data units to horizontal raster units.
+.SH ARGUMENTS
+.TP 15
+\fBx\fP
+.SB (i)
+X coordinate
+.SH "SEE ALSO"
+\fBniceplot(3f)\fP
+.SH AUTHOR
+Danny Harvey

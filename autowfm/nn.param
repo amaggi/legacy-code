@@ -1,0 +1,84 @@
+c
+c	MEMORY FOR 3-D NN ROUTINES SIMPLE INTERFACE
+c
+c		Explanation of parameters
+c
+c		np_max is the maximum number of points
+c		nd_max is the maximum number of dimensions (3)
+c		nt_max is the maximum number of tetrahedra
+c		nnpn_max is the maximum number of neighbours per node
+c		nwork3d is a work array (~10*np_max)
+c
+c		Arrays used under special conditions:
+c
+c		Work arrays of size nnsum_max are only used 
+c		if findnode is to be called (approx 5*np_max).
+c		Work arrays of size ntsum_max are only used 
+c		if findnode is to be called (approx 7*np_max).
+c
+c		nf_max is the maximum number of triangles on the convex hull.
+c		nh_max is the maximum number of nodes on the convex hull.
+c		Work arrays of size nf_max and nhwork_max are only used
+c		if tetrahedra are to be extended outside of the convex hull 
+c		(nf_max is approx np_max/4)
+c		(nh_max = (4+nf_max)/2)
+c		(nhwork_max = 3*nf_max).
+c
+c		All work arrays can be re-used after 
+c		initialization call to nn3d_init has been completed.
+c
+c------------------------------------------------------------------------
+c
+c					Set memory for all modes
+c
+c------------------------------------------------------------------------
+c
+        parameter         (np_max=65000,nd_max=3,nt_max=260000)
+c       parameter         (np_max=600000,nd_max=3,nt_max=3000000)
+        parameter         (nnpn_max=1000,maxstacksize=100)
+        parameter         (nwork3d=650000)
+c       parameter         (nwork3d=6000000)
+c
+c------------------------------------------------------------------------
+c
+c					Set memory for findnode mode
+c					(icall_find_node = 1)
+c
+c------------------------------------------------------------------------
+c
+        parameter         (nnsum_max=700000)
+        parameter         (ntsum_max=700000)
+c       parameter         (nnsum_max=3000000)
+c       parameter         (ntsum_max=4500000)
+        parameter         (np_max2=np_max)
+c
+c					If findnode is not used 
+c					(i.e. input parameter 
+c					 icall_find_node .ne.1)
+c					then remove associated memory
+c       parameter         (nnsum_max=1)
+c       parameter         (ntsum_max=1)
+c       parameter         (np_max2=1)
+c
+c------------------------------------------------------------------------
+c
+c					Set memory for extention mode
+c					(iextend_outside_hull = 1)
+c
+c------------------------------------------------------------------------
+c
+        parameter         (nf_max=2000)
+c       parameter         (nf_max=200000)
+        parameter         (nh_max=(4+nf_max)/2)
+        parameter         (nwork2d=3*nf_max+nh_max)
+        parameter         (np_max3=np_max)
+c
+c					If option to extend tetrahedra 
+c					outside of convex hull is not used 
+c					(i.e. input parameter 
+c					 iextend_outside_hull .ne.1)
+c					then remove associated memory
+c       parameter         (nf_max=1)
+c       parameter         (nh_max=1)
+c       parameter         (nwork2d=1)
+c       parameter         (np_max3=1)

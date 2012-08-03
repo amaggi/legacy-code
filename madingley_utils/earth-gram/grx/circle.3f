@@ -1,0 +1,59 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CIRCLE 3F "%G%"
+.SH NAME
+circle \- draw a circle
+.SH SYNOPSIS
+.HP 15
+\fBcall circle(xc, yc, r, narc, iclose, iclip, thick, ithick)\fP
+.IP \fBreal\fP 15
+\fBxc, yc, r, narc, thick\fP
+.IP \fBinteger\fP 15
+\fBiclose, ithick, iclip\fP
+.SH DESCRIPTION
+FORTRAN subroutine \fBcircle()\fP draws a circle, either open or closed (open meaning a circle with a white center, closed a circle with a black center) in the niceplot window .
+.SH ARGUMENTS
+.TP 15
+\fBxc\fP
+.SB (i)
+X-coordinate of the center of the circle in user units.
+.TP 15
+\fByc\fP
+.SB (i)
+Y-coordinate of the center of the circle in user units.
+.TP 15
+\fBr\fP
+.SB (i)
+Radius of the circle in user units.
+If the user units are not isotropic with respect to the physical plot map, then you will get open and closed ellipses (whoopee!)
+.TP 15
+\fBnarc\fP
+.SB (i)
+Number of straight line segments to approximate the circle with.
+.TP 15
+\fBiclose\fP
+.SB (i)
+Open/closed flag
+.nf
+0 - Draw an open circle
+1 - Draw a closed cirlce
+.fi
+.TP 15
+\fBiclip\fP
+.SB (i)
+Clip flag (\fBsee plot1(3f)\fP)
+.TP 15
+\fBthick\fP
+.SB (i)
+Thickness of line making up circle in inches
+.TP 15
+\fBithick\fP
+.SB (i)
+Thickness flag (\fBsee plot1(3f)\fP)
+.SH "SEE ALSO"
+\fBniceplot(3f), plot1(3f)\fP
+.SH AUTHOR
+Danny Harvey

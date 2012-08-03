@@ -1,0 +1,40 @@
+'\" te
+.\" %W% %G%
+.EQ
+delim $$
+.EN
+.TH CURSOR 3F "%G%"
+.SH NAME
+cursor \- enable the niceplot cursor
+.SH SYNOPSIS
+.HP 15
+\fBcall cursor(x, y, chr)\fP
+.TP 15
+\fBreal\fP
+\fBx, y\fP
+.TP 15
+\fBcharacter*(*)\fP
+\fBchr\fP
+.SH DESCRIPTION
+The FORTRAN subroutine \fBcursor()\fP will enable the cross-hair graphics input mode and read in the position of the cursor.  Note that the appearance of the cursor is controlled by a prior call to \fBsetcursor(3f)\fP and cursor tracking can be done with a prior call to \fBtrackcursor(3f)\fP
+.SH ARGUMENTS
+.TP 15
+\fBx\fP
+.SB (i)
+X-coordinate in user units for prepositioning cursor.
+.SB (o)
+X-coordinate in user units of input cursor position.
+.TP 15
+\fBy\fP
+.SB (i)
+Y-coordinate in user units for prepositioning cursor.
+.SB (o)
+Y-coordinate in user units of input cursor position.
+.TP 15
+\fBchr\fP
+.SB (o)
+Returns the character which was typed to initiate read.
+.SH "SEE ALSO"
+\fBniceplot(3f), setcursor(3f), trackcursor(3f)\fP
+.SH AUTHOR
+Danny Harvey

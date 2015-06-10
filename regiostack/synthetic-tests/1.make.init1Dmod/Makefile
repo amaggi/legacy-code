@@ -2,9 +2,9 @@ OPT=-g -Wall
 FC=gfortran
 FFLAGS = $(OPT)
 
-LIBDIR=${HOME}/code/lib
-BINDIR=${HOME}/code/bin
-INCDIR=${HOME}/code/include
+LIBDIR=${HOME}/lib
+BINDIR=${HOME}/bin
+INCDIR=${HOME}/include
 LIBSRC=synt_io.f synt_math.f choices.f Tcammarano.f lithcooling.f
 LIBSRCV3=synt_ioV3.f synt_math.f choices.f Tcammarano.f lithcooling.f choices_dt.f kaminski_ribe.f
 LIB=libsyntmodel.a

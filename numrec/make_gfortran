@@ -1,8 +1,8 @@
-FFLAGS= 
+FFLAGS= -fno-range-check 
 FC = gfortran
 CC = gcc
 
-LIBDIR=${HOME}/code/lib
+LIBDIR=${HOME}/lib
 
 LIB=libnumrec.a
 

@@ -5,9 +5,9 @@ FFLAGS =
 
 #LIBDIR=/software/apps/seismo/lib
 CODE=${HOME}/code
-LIBDIR=${CODE}/lib
-INCDIR=${CODE}/include
-BINDIR=${CODE}/bin
+LIBDIR=${HOME}/lib
+INCDIR=${HOME}/include
+BINDIR=${HOME}/bin
 LIB=libutil.a
 INC=kutils.h
 LIBSRC =asktxt.f caldat.f calendar.f distaz.f julday.f julian.f openf.f remove.f yesno.f

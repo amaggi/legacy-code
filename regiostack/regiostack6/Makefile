@@ -1,14 +1,14 @@
 F90 = gfortran
 PROGS = xregiostack6 xregiostack6dt
-BIN = ${HOME}/code/bin
+BIN = ${HOME}/bin
 
 all:${PROGS}
 
 xregiostack6: regiostack6_ompV3d_alessia.f
-	${F90} -O2 regiostack6_ompV3d_alessia.f -o xregiostack6
+	${F90} -O2 -fopenmp regiostack6_ompV3d_alessia.f -o xregiostack6
 
 xregiostack6dt: regiostack6_ompV3d_alessia_delaytime.f
-	${F90} -O2 regiostack6_ompV3d_alessia_delaytime.f -o xregiostack6dt
+	${F90} -O2 -fopenmp regiostack6_ompV3d_alessia_delaytime.f -o xregiostack6dt
 
 install: ${PROGS}
 	for i in ${PROGS}; do install -m 0755 -s $$i $(BIN) ; done

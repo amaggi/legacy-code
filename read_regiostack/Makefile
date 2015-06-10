@@ -7,7 +7,7 @@ CFLAGS = ${OPT}
 FFLAGS = ${OPT}
 
 
-BINDIR= ${CODE}/bin
+BINDIR= ${HOME}/bin
 
 SUFFIXES = .f90 .o
 .SUFFIXES: $(SUFFIXES)

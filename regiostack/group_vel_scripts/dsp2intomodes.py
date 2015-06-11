@@ -12,6 +12,9 @@ random_error = 0.05     # contribution to group velocity error from event
 corr_distance = 200.     # correlation distance (for inversion)
 sigma_m = 0.5       # a-priori model variance
 
+model_asc = 'PREM_RU0.ASC'
+prem_input = 'PREM_1s.csv'
+
 def period2key(period):
     return "%3.1f"%period
 
